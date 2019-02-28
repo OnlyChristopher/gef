@@ -1,0 +1,857 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="eaa02278-851f-4695-b64e-925266dbd0e9" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/site_manager/composer.json</pharConfigPath>
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="GEF" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="GEF" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="GEF" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="GEF01: schema" type="76f4a085:MysqlImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="GEF" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="GEF01: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="proyectos: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/intranet/resources/views/proyectos/create.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="74">
+              <caret line="88" column="137" selection-start-line="88" selection-start-column="137" selection-end-line="88" selection-end-column="137" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>swal-overlay</find>
+      <find>swal</find>
+      <find>codigo</find>
+      <find>plantillas</find>
+      <find>Plantillas</find>
+      <find>Plantilla</find>
+      <find>nombre_plantilla</find>
+      <find>plantilla</find>
+      <find>archivo_miscelaneo</find>
+      <find>pla</find>
+      <find>$plantillas</find>
+      <find>menupadres</find>
+      <find>$plantilla</find>
+      <find>1</find>
+      <find>view</find>
+      <find>downloadfile</find>
+      <find>id_areas</find>
+      <find>misce</find>
+      <find>downloadfilePlantillas</find>
+      <find>PlantillasController</find>
+      <find>plantillasAreas</find>
+      <find>Session</find>
+      <find>Miscelaneos</find>
+      <find>miscelaneos</find>
+      <find>Miscelaneo</find>
+      <find>lang</find>
+      <find>language</find>
+      <find>sortable</find>
+      <find>zu</find>
+      <find>index</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>/assets/</replace>
+      <replace>/frontend/assets/</replace>
+      <replace>documento</replace>
+      <replace>miscelaneos</replace>
+      <replace>Miscelaneos</replace>
+      <replace>Miscelaneo</replace>
+      <replace>nombre_documento</replace>
+      <replace>miscelaneo</replace>
+      <replace>archivo_documento</replace>
+      <replace>Proyectos</replace>
+      <replace>proyectos</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>D:\Proyectos\GEF\admin\intranet\vendor\laravel\framework\src\Illuminate\Database</dir>
+      <dir>D:\Proyectos\GEF\admin\intranet</dir>
+    </dirStrings>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.txt" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/info.php" />
+        <option value="$PROJECT_DIR$/html/login_v3.html" />
+        <option value="$PROJECT_DIR$/assets/css/default/style.min.css" />
+        <option value="$PROJECT_DIR$/assets/css/default/theme/default.css" />
+        <option value="$PROJECT_DIR$/html/login.html" />
+        <option value="$PROJECT_DIR$/html/index.html" />
+        <option value="$PROJECT_DIR$/site_manager/.htaccess" />
+        <option value="$PROJECT_DIR$/site_manager/.env" />
+        <option value="$PROJECT_DIR$/frontend/one-page-parallax/index.html" />
+        <option value="$PROJECT_DIR$/intranet/resources/views/auth/login.blade.php" />
+        <option value="$PROJECT_DIR$/index.php" />
+        <option value="$PROJECT_DIR$/intranet/.env" />
+        <option value="$PROJECT_DIR$/intranet/app/Usuarios.php" />
+        <option value="$PROJECT_DIR$/intranet/resources/views/administracion/usuarios/create.blade.php" />
+        <option value="$PROJECT_DIR$/intranet/resources/views/administracion/usuarios/index.blade.php" />
+        <option value="$PROJECT_DIR$/intranet/app/Plantillas.php" />
+        <option value="$PROJECT_DIR$/intranet/app/Http/Controllers/PlanillasController.php" />
+        <option value="$PROJECT_DIR$/intranet/app/Procedimientos.php" />
+        <option value="$PROJECT_DIR$/intranet/app/Http/Controllers/ProcedimientosControlller.php" />
+        <option value="$PROJECT_DIR$/intranet/app/Http/Controllers/UsuariosController.php" />
+        <option value="$PROJECT_DIR$/intranet/config/filesystems.php" />
+        <option value="$PROJECT_DIR$/intranet/resources/views/documentos/plantillas/detail.blade.php" />
+        <option value="$PROJECT_DIR$/intranet/app/Http/Controllers/HomeController.php" />
+        <option value="$PROJECT_DIR$/intranet/resources/views/home.blade.php" />
+        <option value="$PROJECT_DIR$/intranet/app/Providers/AppServiceProvider.php" />
+        <option value="$PROJECT_DIR$/intranet/app/Menu.php" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/4c83438b-e59f-478f-b066-7b091d6b1c83/console.sql" />
+        <option value="$PROJECT_DIR$/intranet/resources/views/documentos/plantillas/edit.blade.php" />
+        <option value="$PROJECT_DIR$/intranet/resources/views/documentos/plantillas/create.blade.php" />
+        <option value="$PROJECT_DIR$/intranet/routes/web.php" />
+        <option value="$PROJECT_DIR$/intranet/resources/views/documentos/miscelaneos/create.blade.php" />
+        <option value="$PROJECT_DIR$/intranet/resources/views/documentos/procedimientos/create.blade.php" />
+        <option value="$PROJECT_DIR$/intranet/resources/views/documentos/miscelaneos/edit.blade.php" />
+        <option value="$PROJECT_DIR$/intranet/app/Http/Controllers/MiscelaneosController.php" />
+        <option value="$PROJECT_DIR$/intranet/resources/views/documentos/plantillas/index.blade.php" />
+        <option value="$PROJECT_DIR$/intranet/resources/views/documentos/miscelaneos/index.blade.php" />
+        <option value="$PROJECT_DIR$/intranet/resources/views/documentos/procedimientos/index.blade.php" />
+        <option value="$PROJECT_DIR$/intranet/resources/views/proyectos/actividades/create.blade.php" />
+        <option value="$PROJECT_DIR$/intranet/app/Http/Controllers/ProcedimientosController.php" />
+        <option value="$PROJECT_DIR$/intranet/app/Http/Controllers/PlantillasController.php" />
+        <option value="$PROJECT_DIR$/intranet/bootstrap/app.php" />
+        <option value="$PROJECT_DIR$/intranet/app/Http/Controllers/ProyectosController.php" />
+        <option value="$PROJECT_DIR$/intranet/resources/views/proyectos/edit.blade.php" />
+        <option value="$PROJECT_DIR$/intranet/resources/views/layouts/app.blade.php" />
+        <option value="$PROJECT_DIR$/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" />
+        <option value="$PROJECT_DIR$/intranet/public/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" />
+        <option value="$PROJECT_DIR$/intranet/resources/views/proyectos/create.blade.php" />
+      </list>
+    </option>
+  </component>
+  <component name="PhpServers">
+    <servers />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/site_manager/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/sebastian/resource-operations" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/mockery/mockery" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/nesbot/carbon" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/vlucas/phpdotenv" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/phpunit/php-token-stream" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/phpunit/phpunit-mock-objects" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/phpdocumentor/type-resolver" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/symfony/debug" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/dnoegel/php-xdg-base-dir" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/hamcrest/hamcrest-php" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/laravel/tinker" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/laravel/framework" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/league/flysystem" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/composer" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/phpspec/prophecy" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/erusev/parsedown" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/swiftmailer/swiftmailer" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/mtdowling/cron-expression" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/ramsey/uuid" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/psy/psysh" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/fzaninotto/faker" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/tijsverkoyen/css-to-inline-styles" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/jakub-onderka/php-console-highlighter" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/jakub-onderka/php-console-color" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/site_manager/vendor/sebastian/exporter" />
+    </include_path>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-43" />
+    <option name="width" value="1382" />
+    <option name="height" value="588" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <showMembers ProjectPane="true" />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="intranet" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="intranet" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="intranet" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="intranet" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="intranet" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="MiscelaneosController.php" type="88303cf5:PhpFileNode" />
+            </path>
+            <path>
+              <item name="admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="intranet" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="intranet" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="intranet" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="intranet" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="intranet" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="intranet" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="documentos" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="intranet" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="documentos" type="462c0819:PsiDirectoryNode" />
+              <item name="plantillas" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="intranet" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="layouts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="intranet" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="proyectos" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="PHP" />
+    <property name="database.console.LAST_STATE" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/intranet" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="C:/Program Files/nodejs/node" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+    <property name="two.files.diff.last.used.folder" value="$PROJECT_DIR$/intranet" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Proyectos\GEF\admin\intranet\resources\views" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Proyectos\GEF\admin\intranet\public" />
+      <recent name="D:\Proyectos\GEF\admin\html" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="eaa02278-851f-4695-b64e-925266dbd0e9" name="Default Changelist" comment="" />
+      <created>1549150615052</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1549150615052</updated>
+      <workItem from="1549150617418" duration="380000" />
+      <workItem from="1549258275413" duration="2797000" />
+      <workItem from="1549361397571" duration="1899000" />
+      <workItem from="1549422151573" duration="3110000" />
+      <workItem from="1549513306947" duration="2365000" />
+      <workItem from="1549531255216" duration="1176000" />
+      <workItem from="1549593163780" duration="998000" />
+      <workItem from="1549600054143" duration="3304000" />
+      <workItem from="1549730806691" duration="139000" />
+      <workItem from="1549731235880" duration="14000" />
+      <workItem from="1549740260618" duration="2566000" />
+      <workItem from="1549850306392" duration="279000" />
+      <workItem from="1549862381549" duration="4167000" />
+      <workItem from="1549869922344" duration="3900000" />
+      <workItem from="1549873880079" duration="663000" />
+      <workItem from="1549937977206" duration="3800000" />
+      <workItem from="1550195778352" duration="2246000" />
+      <workItem from="1550234599515" duration="1325000" />
+      <workItem from="1550347389036" duration="2816000" />
+      <workItem from="1550362663714" duration="2190000" />
+      <workItem from="1550371687152" duration="4569000" />
+      <workItem from="1550428572624" duration="11678000" />
+      <workItem from="1550463901109" duration="17193000" />
+      <workItem from="1550545677859" duration="15213000" />
+      <workItem from="1550624599174" duration="5501000" />
+      <workItem from="1550728878734" duration="2715000" />
+      <workItem from="1550805532050" duration="4486000" />
+      <workItem from="1550889062909" duration="3288000" />
+      <workItem from="1550956963287" duration="1456000" />
+      <workItem from="1550960513436" duration="12438000" />
+      <workItem from="1550979876353" duration="7945000" />
+      <workItem from="1551028987677" duration="246000" />
+      <workItem from="1551029283318" duration="4105000" />
+      <workItem from="1551036807913" duration="23509000" />
+      <workItem from="1551161084891" duration="355000" />
+      <workItem from="1551238745164" duration="7206000" />
+      <workItem from="1551324885276" duration="4977000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="167014000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" weight="0.26963747" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Command Line Tools Console" weight="0.32961783" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32961783" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32961783" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32961783" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.4745223" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5030211" side_tool="true" weight="0.3312102" />
+      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="File Transfer" order="12" sideWeight="0.49697885" weight="0.3312102" />
+      <window_info anchor="bottom" id="Database Console" order="13" weight="0.32961783" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Remote Host" order="3" weight="0.20619336" />
+      <window_info anchor="right" id="Database" order="4" weight="0.25" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2620846" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32961783" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32961783" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32961783" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.4745223" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="10" sideWeight="0.5030211" side_tool="true" visible="true" weight="0.3312102" />
+      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="File Transfer" order="12" sideWeight="0.49697885" visible="true" weight="0.3312102" />
+      <window_info anchor="bottom" id="Database Console" order="13" weight="0.32961783" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Remote Host" order="3" weight="0.20619336" />
+      <window_info anchor="right" id="Database" order="4" weight="0.25" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/intranet/app/Http/Controllers/Auth/LoginController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="27" column="25" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/app/Http/Middleware/VerifyCsrfToken.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/app/Providers/EventServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/app/Providers/BroadcastServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/app/Providers/RouteServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1226" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/app/Providers/AuthServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-138" />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/MainController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="95" column="25" selection-start-line="95" selection-start-column="21" selection-end-line="95" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/4c83438b-e59f-478f-b066-7b091d6b1c83/console.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/resources/views/home.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="21" selection-start-column="10" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://4c83438b-e59f-478f-b066-7b091d6b1c83/schema/GEF01/table/menu">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://4c83438b-e59f-478f-b066-7b091d6b1c83/schema/GEF01/table/areas">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/app/Menu.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="452">
+          <caret line="24" column="41" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="41" />
+          <folding>
+            <element signature="e#23#62#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/app/Providers/AppServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+          <folding>
+            <element signature="e#33#72#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/resources/views/documentos/plantillas/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-828">
+          <caret line="48" column="64" selection-start-line="48" selection-end-line="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/resources/views/documentos/procedimientos/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="49" selection-start-line="49" selection-end-line="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/resources/views/documentos/procedimientos/edit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-506">
+          <caret line="13" column="28" lean-forward="true" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/resources/views/documentos/miscelaneos/edit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="105" column="73" selection-start-line="105" selection-start-column="73" selection-end-line="105" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/resources/views/documentos/procedimientos/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/resources/views/documentos/miscelaneos/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/resources/views/documentos/plantillas/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="2" selection-start-line="2" selection-end-line="7" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/app/Http/Controllers/HomeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/resources/views/proyectos/actividades/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1863" />
+      </provider>
+    </entry>
+    <entry file="das://4c83438b-e59f-478f-b066-7b091d6b1c83/schema/GEF01/table/ingenieria">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://4c83438b-e59f-478f-b066-7b091d6b1c83/schema/GEF01/table/proyectos">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/resources/views/proyectos/actividades/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/app/Http/Controllers/PlantillasController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+          <folding>
+            <element signature="e#39#67#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/resources/views/proyectos/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/resources/views/documentos/miscelaneos/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="4" column="30" lean-forward="true" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/public/assets/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="42" column="53" selection-start-line="42" selection-start-column="34" selection-end-line="42" selection-end-column="53" />
+          <folding>
+            <element signature="e#7#389#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/public/assets/js/apps.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-668">
+          <caret line="11" column="14" lean-forward="true" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/server.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-207" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/resources/js/bootstrap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1101" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/resources/js/components/ExampleComponent.vue">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/bootstrap/app.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-989">
+          <caret line="2" column="2" lean-forward="true" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
+          <folding>
+            <element signature="e#7#407#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/bootstrap/cache/services.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/bootstrap/cache/packages.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/public/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="61">
+          <caret column="281016" selection-start-column="281016" selection-end-column="281016" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="16" column="32" lean-forward="true" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/resources/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-184">
+          <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://4c83438b-e59f-478f-b066-7b091d6b1c83/schema/GEF01/table/principal">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/app/Http/Controllers/MiscelaneosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="106" column="27" selection-start-line="106" selection-end-line="107" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/app/Http/Controllers/ProcedimientosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-966">
+          <caret line="48" column="76" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="76" />
+          <folding>
+            <element signature="e#39#67#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/app/Http/Controllers/ProyectosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="70" column="7" lean-forward="true" selection-start-line="70" selection-start-column="7" selection-end-line="70" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/resources/views/documentos/plantillas/edit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="35" column="78" selection-start-line="35" selection-start-column="61" selection-end-line="35" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/resources/views/proyectos/edit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="88" column="137" selection-start-line="88" selection-start-column="137" selection-end-line="88" selection-end-column="137" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="1706" column="26" selection-start-line="1706" selection-start-column="26" selection-end-line="1706" selection-end-column="26" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/resources/views/layouts/app.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="86">
+          <caret line="320" column="62" lean-forward="true" selection-start-line="320" selection-start-column="62" selection-end-line="320" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/public/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="1706" column="26" selection-start-line="1706" selection-start-column="26" selection-end-line="1706" selection-end-column="26" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intranet/resources/views/proyectos/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="74">
+          <caret line="88" column="137" selection-start-line="88" selection-start-column="137" selection-end-line="88" selection-end-column="137" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

@@ -1,0 +1,11 @@
+@font-face {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 400;
+  font-display: auto;
+  src: url("https://seantheme.com/color-admin-v4.3/frontend/assets/plugins/font-awesome/webfonts/fa-regular-400.eot");
+  src: url("https://seantheme.com/color-admin-v4.3/frontend/assets/plugins/font-awesome/webfonts/fa-regular-400.eot?#iefix") format("embedded-opentype"), url("https://seantheme.com/color-admin-v4.3/frontend/assets/plugins/font-awesome/webfonts/fa-regular-400.woff2") format("woff2"), url("https://seantheme.com/color-admin-v4.3/frontend/assets/plugins/font-awesome/webfonts/fa-regular-400.woff") format("woff"), url("https://seantheme.com/color-admin-v4.3/frontend/assets/plugins/font-awesome/webfonts/fa-regular-400.ttf") format("truetype"), url("https://seantheme.com/color-admin-v4.3/frontend/assets/plugins/font-awesome/webfonts/fa-regular-400.svg#fontawesome") format("svg"); }
+
+.far {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 400; }
