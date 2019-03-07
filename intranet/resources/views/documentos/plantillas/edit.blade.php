@@ -50,12 +50,8 @@
                                         <option value="{{$area->id_area}}"  {{ $plantillas->id_area == $area->id_area ? 'selected="selected"' : '' }}>{{$area->nombre_area}}</option>
                                     @endforeach
                                 </select>
-
                             </div>
-
-
                         </div>
-
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="nombre_plantilla">Plantilla</label>
                             <div class="col-md-6">

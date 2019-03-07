@@ -41,10 +41,9 @@
                                 <th>Fecha Inicio</th>
                                 <th>Fecha Fin</th>
                                 <th>Estado</th>
-                                <th>Notificacion</th>
                                 <th>Comentarios</th>
                                 <th>Cronograma</th>
-                                <th width="90px">Acciones</th>
+                                <th width="130px">Acciones</th>
                             </tr>
                            
                             @foreach ($proyectos as $proyecto)
@@ -60,7 +59,6 @@
                                             Caducado    
                                         @endif
                                     </td>
-                                    <td>{{$proyecto->notificacion}}</td>
                                     <td>{{$proyecto->comentarios}}</td>
                                    
                                     <td>
@@ -75,6 +73,10 @@
                                     <td>
                                         <form action="{{ route('proyectos.destroy', $proyecto->id_proyecto) }}"
                                               method="post">
+                                            <a class="btn btn-icon btn-circle btn-info"
+                                               href="{{route('proyectos.show',$proyecto->id_proyecto)}}"
+                                               data-toggle="tooltip" data-container="body" data-title="Detalle"><i
+                                                        class="fab fa-envira"></i></a>
                                             <a class="btn btn-icon btn-circle btn-warning"
                                                href="{{route('proyectos.edit',$proyecto->id_proyecto)}}"
                                                data-toggle="tooltip" data-container="body" data-title="Editar"><i

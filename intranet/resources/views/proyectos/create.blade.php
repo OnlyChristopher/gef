@@ -59,12 +59,7 @@
                                 <input type="text" name="ffin_proyectada" id="ffin_proyectada" placeholder="Fecha Fin Proyectada" class="form-control fecha" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Fecha Fin">
                             </div>
                         </div>
-                        <div class="form-group row m-b-10">
-                            <label class="col-md-3 text-md-right col-form-label" for="notificacion">Notificacion</label>
-                            <div class="col-md-6">
-                                <input type="text" name="notificacion" id="notificacion" placeholder="Notificacion" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Nofiticacion" >
-                            </div>
-                        </div>
+
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="comentarios">Comentarios</label>
                             <div class="col-md-6">

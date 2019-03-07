@@ -4,41 +4,34 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-use Illuminate\Support\Facades\Storage;
-
-
-class ProyectosController extends Controller
+class CarpetasController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    protected $dateformt;
-
-    public function __construct(){
-        $this->dateformt = date('Y-m-d');
-    }
-
-    public function index()
+    public function index($id)
     {
-        $proyectos =    DB::table('proyectos')
-                        ->paginate(10);
-        return view('proyectos.index', ['proyectos' => $proyectos]);
-
+        $proyectos = DB::table('proyectos')
+	                    ->where('id_proyecto','=',$id)
+	                    ->first();
+        return view('proyectos.carpetas.index', ['proyectos' => $proyectos]);
     }
-
-    
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-	    return view('proyectos.create');
+	    $proyectos = DB::table('proyectos')
+	                   ->where('id_proyecto','=',$id)
+	                   ->first();
+	    $carpetas =  DB::table('carpetas_principales')
+	                    ->get();
+	    return view('proyectos.carpetas.create', ['proyectos' => $proyectos, 'carpetas' => $carpetas]);
     }
 
     /**
@@ -60,9 +53,7 @@ class ProyectosController extends Controller
      */
     public function show($id)
     {
-        $proyectos = DB::table('proyectos')->where('id_proyecto','=',$id)->first();
-        $actividades = DB::table('actividades')->where('id_proyecto','=',$id)->paginate(10);
-        return view('proyectos.detail',  ['proyectos' => $proyectos, 'actividades' => $actividades]);
+        //
     }
 
     /**
@@ -73,10 +64,7 @@ class ProyectosController extends Controller
      */
     public function edit($id)
     {
-	    $proyectos = DB::table('proyectos')->where('id_proyecto','=',$id)->first();
-
-    	return view('proyectos.edit',  ['proyectos' => $proyectos]);
-
+        //
     }
 
     /**

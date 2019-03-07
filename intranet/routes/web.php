@@ -45,6 +45,12 @@ Route::group(['middleware' => 'auth'], function () {
     
 	Route::resource('actividades', 'ActividadesController');
 
+	Route::resource('carpetas', 'CarpetasController');
+	Route::get('proyectos/carpetas/{id}', 'CarpetasController@index');
+
+	Route::get('proyectos/carpetas/create/{id}', 'CarpetasController@create');
+
+
 
 });
 

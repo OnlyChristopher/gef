@@ -31,7 +31,11 @@
 	<link href="{{ asset('assets/plugins/bootstrap-select/bootstrap-select.min.css') }}" rel="stylesheet" />
 	<link href="{{ asset('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css') }}" rel="stylesheet" />
 	<link href="{{ asset('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.css') }}" rel="stylesheet" />
-    <!-- ================== END PAGE LEVEL STYLE ================== -->
+	<link href="{{ asset('assets/plugins/jstree/dist/themes/default/style.min.css') }}" rel="stylesheet" />
+	<script src="{{ asset('assets/js/demo/ui-tree.demo.min.js') }}"></script>
+
+
+	<!-- ================== END PAGE LEVEL STYLE ================== -->
 
     <!-- ================== BEGIN BASE JS ================== -->
     <script src="{{ asset('assets/plugins/pace/pace.min.js') }}"></script>
@@ -322,11 +326,13 @@
 <script src="{{ asset('assets/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js') }}" charset="UTF-8"></script>
 <script src="{{ asset('assets/plugins/bootstrap-select/bootstrap-select.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/bootstrap-sweetalert/sweetalert.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/jstree/dist/jstree.min.js') }}"></script>
 
 	<!-- ================== END PAGE LEVEL JS ================== -->
 <script>
     $(document).ready(function() {
         App.init();
+		TreeView.init();
     });
 	$("#fecha_proc").datepicker({
 		language: 'es',

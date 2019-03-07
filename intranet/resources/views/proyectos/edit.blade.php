@@ -50,43 +50,35 @@
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="finicio_proyectada">Fecha Inicio P.</label>
                             <div class="col-md-6">
-                                <input type="text" name="finicio_proyectada" id="finicio_proyectada" placeholder="Fecha Inicio Proyectada" class="form-control fecha" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Fecha Inicio">
+                                <input type="text" name="finicio_proyectada" id="finicio_proyectada" placeholder="Fecha Inicio Proyectada" class="form-control fecha" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Fecha Inicio" value="{{$proyectos->finicio_proyectada}}">
                             </div>
                         </div>
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="finicio_proyectada">Fecha Fin P.</label>
                             <div class="col-md-6">
-                                <input type="text" name="ffin_proyectada" id="ffin_proyectada" placeholder="Fecha Fin Proyectada" class="form-control fecha" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Fecha Fin">
+                                <input type="text" name="ffin_proyectada" id="ffin_proyectada" placeholder="Fecha Fin Proyectada" class="form-control fecha" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Fecha Fin" value="{{$proyectos->ffin_proyectada}}">
                             </div>
                         </div>
                         <div class="form-group row m-b-10">
-                            <label class="col-md-3 text-md-right col-form-label" for="notificacion">Notificacion</label>
+                            <label class="col-md-3 text-md-right col-form-label" for="id_areas">Estado</label>
                             <div class="col-md-6">
-                                <input type="text" name="notificacion" id="notificacion" placeholder="Notificacion" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Nofiticacion" >
+                                <select name="estado_proyecto" id="estado_proyecto" class="form-control selectpicker" data-live-search="true" data-style="btn-white" data-parsley-required="true" data-parsley-required-message="Por favor Seleccione Estado">
+                                        <option value="0"  {{ $proyectos->estado_proyecto == 0 ? 'selected="selected"' : '' }}>Abierto</option>
+                                        <option value="1"  {{ $proyectos->estado_proyecto == 1 ? 'selected="selected"' : '' }}>Cerrado</option>
+                                </select>
                             </div>
                         </div>
+
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="comentarios">Comentarios</label>
                             <div class="col-md-6">
-                                <textarea name="comentarios" id="comentarios" placeholder="Comentarios" class="form-control" rows="3" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Comentario" ></textarea>
+                                <textarea name="comentarios" id="comentarios" placeholder="Comentarios" class="form-control" rows="3" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Comentario" value="{{$proyectos->comentarios}}" ></textarea>
                             </div>
                         </div>
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="cronograma">Cronograma</label>
                             <div class="col-md-6">
                                 <input type="file" accept="*"  name="cronograma" id="cronograma" placeholder="Seleccione Cronograma" class="form-control" {{--data-parsley-required="true" data-parsley-required-message="Por favor Seleccione Archivo"--}}>
-                            </div>
-                        </div>
-                        <div class="form-group row m-b-10">
-                            <label class="col-md-3 text-md-right col-form-label" for="finicio_real">Fecha Inicio R.</label>
-                            <div class="col-md-6">
-                                <input type="text" name="finicio_real" id="finicio_real" placeholder="Fecha Inicio Real" class="form-control fecha" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Fecha Inicio Real">
-                            </div>
-                        </div>
-                        <div class="form-group row m-b-10">
-                            <label class="col-md-3 text-md-right col-form-label" for="ffin_real">Fecha Fin R.</label>
-                            <div class="col-md-6">
-                                <input type="text" name="ffin_real" id="ffin_real" placeholder="Fecha Fin Real" class="form-control fecha" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Fecha Fin Real">
                             </div>
                         </div>
                         <div class="form-group row m-b-10">
