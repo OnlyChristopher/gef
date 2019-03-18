@@ -20,7 +20,7 @@
     <div class="panel panel-inverse">
         <div class="panel-heading">
             <div class="panel-heading-btn">
-                <a class="btn btn-green btn-xs" href="/documentos/plantillas/create/{{$areas->id_area}}">Crear nueva plantilla</a>
+                <a class="btn btn-green btn-xs" href="{{route('plantillasAreasCreate', $areas->id_area)}}">Crear nueva plantilla</a>
             </div>
             <h4 class="panel-title">Plantillas de {{$areas->nombre_area}}</h4>
         </div>

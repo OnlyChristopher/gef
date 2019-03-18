@@ -113,7 +113,7 @@ class PlantillasController extends Controller
     public function file($id)
     {
 		$dl = DB::table('plantillas')->where('id', $id)->first();
-	    return response()->download("../storage/app/$dl->id_area/archivo_plantilla/$dl->codigo/$dl->archivo_plantilla");
+	    return response()->download("../intranet/storage/app/$dl->id_area/archivo_plantilla/$dl->codigo/$dl->archivo_plantilla");
     }
 
     /**

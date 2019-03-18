@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Storage;
 
-
 class ProyectosController extends Controller
 {
     /**
@@ -29,7 +28,7 @@ class ProyectosController extends Controller
 
     }
 
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -49,7 +48,47 @@ class ProyectosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cod_proyecto           = $request->input('cod_proyecto');
+        $nombre_proyecto        = $request->input('nombre_proyecto');
+	    $periodo_ejecucion      = $request->input('periodo_ejecucion');
+        $duracion               = $request->input('duracion');
+        $estado_proyecto        = $request->input('estado_proyecto');
+        $comentarios            = $request->input('comentarios');
+        $carpetas               = $request->input('carpetas');
+        $usuario_creacion       = $request->input('id_user');
+        $fecha_creacion         = $this->dateformt;
+
+
+	    $carpetas = $carpetas ? 1 : 0;
+
+	    $id = DB::table('proyectos')->max('id_proyecto');
+
+	    $id = $id + 1;
+
+	    if($carpetas = 1) {
+		    $carpetasprincpales = DB::table('carpetas_principales')->get();
+
+		    foreach ( $carpetasprincpales as $carpeta ) {
+			    Storage::disk('local')->makeDirectory('proyecto/'.$id.'/'.$carpeta->nombre,0775,true);
+		    }
+	    }
+
+
+        $data = array('cod_proyecto'            => $cod_proyecto,
+                        'nombre_proyecto'       => $nombre_proyecto,
+	                    'periodo_ejecucion'     => $periodo_ejecucion,
+	                    'duracion'              => $duracion,
+	                    'estado_proyecto'       => $estado_proyecto,
+                        'comentarios'           => $comentarios,
+                        'carpetas'              => $carpetas,
+	                    'usuario_creacion'      => $usuario_creacion,
+	                    'fecha_creacion'        => $fecha_creacion
+        );
+		//dd($data);
+		DB::table('proyectos')->insert($data);
+		return redirect()->route('proyectos.index')
+	                     ->with('success','Registro Exitoso');
+
     }
 
     /**
@@ -88,7 +127,41 @@ class ProyectosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+	    $cod_proyecto           = $request->input('cod_proyecto');
+	    $nombre_proyecto        = $request->input('nombre_proyecto');
+	    $periodo_ejecucion      = $request->input('periodo_ejecucion');
+	    $duracion               = $request->input('duracion');
+	    $estado_proyecto        = $request->input('estado_proyecto');
+	    $comentarios            = $request->input('comentarios');
+	    $carpetas               = $request->input('carpetas');
+	    $usuario_creacion       = $request->input('id_user');
+	    $fecha_creacion         = $this->dateformt;
+
+
+	    $carpetas = $carpetas ? 1 : 0;
+
+	    if($carpetas = 1) {
+		    $carpetasprincpales = DB::table('carpetas_principales')->get();
+
+		    foreach ( $carpetasprincpales as $carpeta ) {
+			    Storage::disk('local')->makeDirectory('proyecto/'.$id.'/'.$carpeta->nombre,0775,true);
+		    }
+	    }
+
+	    $data = array('cod_proyecto'            => $cod_proyecto,
+	                  'nombre_proyecto'         => $nombre_proyecto,
+	                  'periodo_ejecucion'       => $periodo_ejecucion,
+	                  'duracion'                => $duracion,
+	                  'estado_proyecto'         => $estado_proyecto,
+	                  'comentarios'             => $comentarios,
+	                  'carpetas'                => $carpetas,
+	                  'usuario_actualizo'      => $usuario_creacion,
+	                  'fecha_actualizo'        => $fecha_creacion
+	    );
+	    //dd($data);
+	    DB::table('proyectos')->where('id_proyecto', $id)->update($data);
+	    return redirect()->route('proyectos.index')
+	                     ->with('success','Registro Exitoso');
     }
 
     /**
@@ -97,8 +170,17 @@ class ProyectosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
+	public function destroy($id)
+	{
+		DB::table('proyectos')->where('id_proyecto', $id)->delete();
+		return redirect()->route('proyectos.index')
+		                 ->with('success', 'Registro eliminado correctamente');
+
+	}
+
+	public function file($id)
+	{
+		$dl = DB::table('proyectos')->where('id_proyecto', $id)->first();
+		return response()->download("../intranet/storage/app/cronograma/$dl->cod_proyecto/$dl->cronograma");
+	}
 }

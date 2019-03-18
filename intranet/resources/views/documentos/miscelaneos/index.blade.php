@@ -20,7 +20,7 @@
     <div class="panel panel-inverse">
         <div class="panel-heading">
             <div class="panel-heading-btn">
-                <a class="btn btn-green btn-xs" href="/documentos/miscelaneos/create/{{$areas->id_area}}">Crear nueva miscelaneos</a>
+                <a class="btn btn-green btn-xs" href="{{ route('miscelaneosAreasCreate',$areas->id_area)}}">Crear nueva miscelaneos</a>
             </div>
             <h4 class="panel-title">Miscelaneos de {{$areas->nombre_area}}</h4>
         </div>

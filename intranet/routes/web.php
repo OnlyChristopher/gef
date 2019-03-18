@@ -23,32 +23,40 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
+	Route::get('administracion/usuarios', 'UsuariosController@index');
 	Route::resource('administracion/usuarios', 'UsuariosController');
 
 	Route::get('/documentos/plantillas/area/{id}', 'PlantillasController@index')->name('plantillasAreas');
-	Route::get('/documentos/plantillas/create/{id}', 'PlantillasController@create');
+	Route::get('/documentos/plantillas/create/{id}', 'PlantillasController@create')->name('plantillasAreasCreate');
 	Route::resource('/documentos/plantillas', 'PlantillasController');
     Route::get('/fileplantillas/download/{id}','PlantillasController@file')->name('downloadfilePlantillas');
 
 	Route::get('documentos/procedimientos/area/{id}', 'ProcedimientosController@index')->name('procedimientosAreas');
-	Route::get('documentos/procedimientos/create/{id}', 'ProcedimientosController@create');
+	Route::get('documentos/procedimientos/create/{id}', 'ProcedimientosController@create')->name('procedimientosAreasCreate');
     Route::resource('documentos/procedimientos', 'ProcedimientosController');
     Route::get('/fileprocedimientos/download/{id}','ProcedimientosController@file')->name('downloadfileProcedimientos');
 
 	Route::get('documentos/miscelaneos/area/{id}', 'MiscelaneosController@index')->name('miscelaneosAreas');
-	Route::get('documentos/miscelaneos/create/{id}', 'MiscelaneosController@create');
+	Route::get('documentos/miscelaneos/create/{id}', 'MiscelaneosController@create')->name('miscelaneosAreasCreate');
 	Route::resource('documentos/miscelaneos', 'MiscelaneosController');
 	Route::get('/filemiscelaneos/download/{id}','MiscelaneosController@file')->name('downloadfileMiscelaneos');
+
+
 
 	Route::resource('proyectos', 'ProyectosController');
     Route::get('/fileproyectos/download/{id}','ProyectosController@file')->name('downloadfileProyectos');
     
+	Route::get('actividades', 'ActividadesController@index');
 	Route::resource('actividades', 'ActividadesController');
 
 	Route::resource('carpetas', 'CarpetasController');
-	Route::get('proyectos/carpetas/{id}', 'CarpetasController@index');
+	Route::get('proyectos/carpetas/{id}', 'CarpetasController@index')->name('carpetasProyectos');
 
-	Route::get('proyectos/carpetas/create/{id}', 'CarpetasController@create');
+	Route::get('proyectos/carpetas/create/{id}', 'CarpetasController@create')->name('carpetasProyectosCreate');
+	Route::get('proyectos/carpetas/file/{id}', 'CarpetasController@file')->name('fileCarpetasProyectosCreate');
+	Route::post('proyectos/carpetas/file', 'CarpetasController@filestore')->name('fileStore');
+
+	Route::post('select-ajax', ['as'=>'select-ajax','uses'=>'CarpetasController@carpetasSecundarias']);
 
 
 

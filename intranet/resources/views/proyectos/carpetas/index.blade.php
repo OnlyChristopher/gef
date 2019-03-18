@@ -6,7 +6,9 @@
 @section('content')
     <!-- begin breadcrumb -->
     <ol class="breadcrumb pull-right">
-        <li class="breadcrumb-item active"><a href="javascript:;">Carpetas</a></li>
+        <li class="breadcrumb-item"><a href="{{action('ProyectosController@index')}}">Listado de Proyectos</a></li>
+        <li class="breadcrumb-item"><a href="{{route('proyectos.show',$proyectos->id_proyecto)}}">Detalle de Proyectos</a></li>
+        <li class="breadcrumb-item active">Carpetas</li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
@@ -17,7 +19,12 @@
     <div class="panel panel-inverse">
         <div class="panel-heading">
             <div class="panel-heading-btn">
-                <a class="btn btn-green btn-xs" href="/proyectos/carpetas/create/{{$proyectos->id_proyecto}}">Crear sub carpetas</a>
+                @if ($proyectos->carpetas == 0)
+                    <a class="btn btn-danger btn-xs" href="{{route('proyectos.edit',$proyectos->id_proyecto)}}">Activar carpetas</a>
+                @else
+                    <a class="btn btn-green btn-xs" href="{{route('fileCarpetasProyectosCreate',$proyectos->id_proyecto)}}">Subir Archivo</a>
+                    <a class="btn btn-green btn-xs" href="{{route('carpetasProyectosCreate',$proyectos->id_proyecto)}}">Crear sub carpetas</a>
+                @endif
             </div>
             <h4 class="panel-title">{{$proyectos->nombre_proyecto}}</h4>
         </div>
@@ -29,26 +36,43 @@
                         <strong>{{$message}}</strong>
                     </div>
                 @endif
+                    @if ($proyectos->carpetas == 1)
+                        <div id="jstree-default">
+                            <ul>
+                                <li data-jstree='{"opened":true}' >
+                                    01.Ingenieria
+                                    <ul>
+                                        <li data-jstree='{"opened":true }' >
+                                            Prueba 1
+                                            <ul>
+                                                <li data-jstree='{"opened":true}' >
+                                                    Prueba 1.1
+                                                    <ul>
+                                                        <li data-jstree='{"opened":true, "selected":true }' >
+                                                            Prueba 1.1.1
+                                                            <ul>
+                                                                <li data-jstree='{ "icon" : "fa fa-file fa-lg text-primary" }'><a href="#">3555A</a></li>
+                                                                <li data-jstree='{ "icon" : "fa fa-file fa-lg text-primary" }'><a href="#">3555B</a></li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>02.Licitacion</li>
+                                <li>03.Ejecucion</li>
+                                <li>04.Cierre</li>
+                            </ul>
+                        </div>
+                    @else
+                        <div class="alert alert-info fade show" data-auto-dismiss="2000">
+                            <span class="close" data-dismiss="alert">×</span>
+                            <strong>No hay carpetas creadas</strong>
+                        </div>
+                    @endif
 
-                            <div id="jstree-default">
-                                <ul>
-                                    <li data-jstree='{"opened":true}' >
-                                        01.Ingenieria
-                                        <ul>
-                                            <li data-jstree='{"opened":true, "selected":true }' >
-                                                Prueba 1
-                                                <ul>
-                                                    <li data-jstree='{ "icon" : "fa fa-file fa-lg text-primary" }'><a href="#">3555A</a></li>
-                                                    <li data-jstree='{ "icon" : "fa fa-file fa-lg text-primary" }'><a href="#">3555B</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>02.Licitacion</li>
-                                    <li>03.Ejecucion</li>
-                                    <li>04.Cierre</li>
-                                </ul>
-                            </div>
                         </div>
 
         </div>

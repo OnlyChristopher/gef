@@ -8,8 +8,8 @@
       </database-info>
       <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
-      <user-name>project</user-name>
-      <introspection-schemas>*:@</introspection-schemas>
+      <user-name>hmena1</user-name>
+      <introspection-schemas>*:@,GEF01</introspection-schemas>
     </data-source>
   </component>
 </project>

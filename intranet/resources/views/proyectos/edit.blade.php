@@ -35,6 +35,7 @@
                 <div class="col-md-8 offset-md-2">
                     <form action="{{route('proyectos.update',$proyectos->id_proyecto)}}" method="post" enctype="multipart/form-data" data-parsley-validate="true" autocomplete="off" >
                         @csrf
+                        @method('PUT')
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="cod_proyecto">Codigo</label>
                             <div class="col-md-6">
@@ -48,15 +49,15 @@
                             </div>
                         </div>
                         <div class="form-group row m-b-10">
-                            <label class="col-md-3 text-md-right col-form-label" for="finicio_proyectada">Fecha Inicio P.</label>
+                            <label class="col-md-3 text-md-right col-form-label" for="periodo_ejecucion">Periodo.</label>
                             <div class="col-md-6">
-                                <input type="text" name="finicio_proyectada" id="finicio_proyectada" placeholder="Fecha Inicio Proyectada" class="form-control fecha" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Fecha Inicio" value="{{$proyectos->finicio_proyectada}}">
+                                <input type="text" name="periodo_ejecucion" id="periodo_ejecucion" placeholder="Periodo" class="form-control fecha" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Periodo" value="{{$proyectos->periodo_ejecucion}}">
                             </div>
                         </div>
                         <div class="form-group row m-b-10">
-                            <label class="col-md-3 text-md-right col-form-label" for="finicio_proyectada">Fecha Fin P.</label>
+                            <label class="col-md-3 text-md-right col-form-label" for="duracion">Duracion</label>
                             <div class="col-md-6">
-                                <input type="text" name="ffin_proyectada" id="ffin_proyectada" placeholder="Fecha Fin Proyectada" class="form-control fecha" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Fecha Fin" value="{{$proyectos->ffin_proyectada}}">
+                                <input type="text" name="duracion" id="duracion" placeholder="Duracion" class="form-control fecha" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Duracion" value="{{$proyectos->duracion}}">
                             </div>
                         </div>
                         <div class="form-group row m-b-10">
@@ -75,17 +76,16 @@
                                 <textarea name="comentarios" id="comentarios" placeholder="Comentarios" class="form-control" rows="3" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Comentario" value="{{$proyectos->comentarios}}" ></textarea>
                             </div>
                         </div>
+                        
                         <div class="form-group row m-b-10">
-                            <label class="col-md-3 text-md-right col-form-label" for="cronograma">Cronograma</label>
-                            <div class="col-md-6">
-                                <input type="file" accept="*"  name="cronograma" id="cronograma" placeholder="Seleccione Cronograma" class="form-control" {{--data-parsley-required="true" data-parsley-required-message="Por favor Seleccione Archivo"--}}>
-                            </div>
-                        </div>
-                        <div class="form-group row m-b-10">
-                            <label class="col-md-3 text-md-right col-form-label" for="ffin_real">Crear carpetas</label>
+                            <label class="col-md-3 text-md-right col-form-label" >Crear carpetas</label>
                             <div class="col-md-6">
                                 <div class="checkbox checkbox-css">
-                                    <input type="checkbox" id="cssCheckbox1" value="" />
+                                    @if($proyectos->carpetas == 1)
+                                        <input type="checkbox" id="cssCheckbox1"  name="carpetas" checked />
+                                    @else
+                                        <input type="checkbox" id="cssCheckbox1"  name="carpetas" />
+                                    @endif
                                     <label for="cssCheckbox1"></label>
                                 </div>
                             </div>

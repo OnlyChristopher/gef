@@ -21,7 +21,7 @@
     <div class="panel panel-inverse">
         <div class="panel-heading">
             <div class="panel-heading-btn">
-                <a class="btn btn-green btn-xs" href="/documentos/procedimientos/create/{{$areas->id_area}}">Crear nuevo
+                <a class="btn btn-green btn-xs" href="{{route('procedimientosAreasCreate',$areas->id_area)}}">Crear nuevo
                     procedimientos</a>
             </div>
             <h4 class="panel-title">Procedimientos de {{$areas->nombre_area}}</h4>

@@ -67,6 +67,8 @@ class MiscelaneosController extends Controller
 
 	    $request->archivo_documento->storeAs($id_areas.'/archivo_documento/'.$codigo, $archivo_documento);
 
+	    //Storage::putFile('app/'.$id_areas.'/archivo_documento/'.$codigo,$request->file('archivo_documento'));
+
 	    $data = array('codigo' => $codigo,
 	                  'id_area' => $id_areas,
 	                  'nombre_documento' => $nombre_documento,
@@ -77,6 +79,7 @@ class MiscelaneosController extends Controller
 	                  'archivo_documento' => $archivo_documento,
 	                  'estado_documento' => 0);
 
+	    //dd($data);
 	    DB::table('miscelaneos')->insert($data);
 
 	    return redirect()->route('miscelaneosAreas',$id_areas)
@@ -162,6 +165,6 @@ class MiscelaneosController extends Controller
 	public function file($id)
 	{
 		$dl = DB::table('miscelaneos')->where('id', $id)->first();
-		return response()->download("../storage/app/$dl->id_area/archivo_documento/$dl->codigo/$dl->archivo_documento");
+		return response()->download("../intranet/storage/app/$dl->id_area/archivo_documento/$dl->codigo/$dl->archivo_documento");
 	}
 }

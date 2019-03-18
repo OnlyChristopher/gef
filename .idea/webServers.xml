@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="4d5644ef-64af-47c5-bdeb-eaf8bf08e0e5" name="GEF" url="http://160.153.89.103">
-        <fileTransfer host="160.153.89.103" port="21">
+      <webServer id="5d025454-32d8-43b9-9fa8-55d79cceffc8" name="GEF2" url="http://160.153.95.201">
+        <fileTransfer host="160.153.95.201" port="21">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>

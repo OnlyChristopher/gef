@@ -40,8 +40,11 @@
         <!-- begin brand -->
         <div class="login-header">
             <div class="brand">
-                <span class="logo"></span> <b><a href="http://monitoreos.org/" style="text-decoration: none; color:#2d353c" >Monitoreos</a></b>
+                {{--<span class="logo"></span>--}} <b><a href="https://www.greendfield.com" style="text-decoration: none; color:#2d353c" ><img
+                                src="{{asset('assets/img/logo/logo.jpg')}}" width="100%" alt=""></a></b>
+{{--
                 <small>Iniciar Sesión</small>
+--}}
             </div>
             <div class="icon">
                 <i class="fa fa-lock"></i>

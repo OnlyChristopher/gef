@@ -8,9 +8,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=gb18030">
 
 
-    <title>@yield('title') Intranet | Monitoreos</title>
+    <title>@yield('title') Intranet | GreengField</title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
-    <meta content="" name="description" />
+    <meta content="GreengField" name="description" />
     <meta content="@OnlyChristopher" name="author" />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -41,7 +41,7 @@
     <script src="{{ asset('assets/plugins/pace/pace.min.js') }}"></script>
     <!-- ================== END BASE JS ================== -->
 </head>
-<body>
+<body class="dashboard">
 	<!-- begin #page-loader -->
 	<div id="page-loader" class="fade show"><span class="spinner"></span></div>
 	<!-- end #page-loader -->
@@ -52,7 +52,7 @@
 		<div id="header" class="header navbar-default">
 			<!-- begin navbar-header -->
 			<div class="navbar-header">
-				<a href="/" class="navbar-brand"><img src="{{ asset('assets/img/logo/logo.jpg') }}" alt=""></a>
+				<a href="{{action('HomeController@index')}}" class="navbar-brand"><img src="{{ asset('assets/img/logo/logo.jpg') }}" alt=""></a>
 				<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
@@ -198,7 +198,7 @@
 				<ul class="nav">
 					<li class="nav-header">Navegacion</li>
 					<li class="@yield('clase-active-inicio')">
-					    <a href="/">
+					    <a href="{{action('HomeController@index')}}">
 					    <i class="fa fa-home"></i>
 					    <span>Inicio</span>
 					    </a>
@@ -217,9 +217,9 @@
 											{{ $menu->desc_menu}}
 										</a>
 										<ul class="sub-menu @yield('clase-active-documentos-'.$menu->icono_menu.'')">
-											<li class="@yield('clase-active-plantillas-'.$menu->icono_menu.'')"><a href="/documentos/plantillas/area/{{ $menu->icono_menu}}">{{ __('Plantillas') }}</a></li>
-											<li class="@yield('clase-active-procedimientos-'.$menu->icono_menu.'')"><a href="/documentos/procedimientos/area/{{ $menu->icono_menu}}">{{ __('Procedimientos') }}</a></li>
-											<li class="@yield('clase-active-miscelaneos-'.$menu->icono_menu.'')"><a href="/documentos/miscelaneos/area/{{ $menu->icono_menu}}">{{ __('Miscelaneos') }}</a></li>
+											<li class="@yield('clase-active-plantillas-'.$menu->icono_menu.'')"><a href="{{route('plantillasAreas', ['id' => $menu->icono_menu])}}">{{ __('Plantillas') }}</a></li>
+											<li class="@yield('clase-active-procedimientos-'.$menu->icono_menu.'')"><a href="{{route('procedimientosAreas', ['id' => $menu->icono_menu])}}">{{ __('Procedimientos') }}</a></li>
+											<li class="@yield('clase-active-miscelaneos-'.$menu->icono_menu.'')"><a href="{{route('miscelaneosAreas', ['id' => $menu->icono_menu])}}">{{ __('Miscelaneos') }}</a></li>
 										</ul>
 									</li>
 								@endforeach
@@ -233,10 +233,10 @@
 						</a>
 						<ul class="sub-menu" >
                                 <li class="@yield('clase-active-proyectos')">
-                                    <a href="/proyectos/">{{ __('Listado de Proyectos') }}</a>
+                                    <a href="{{action('ProyectosController@index')}}">{{ __('Listado de Proyectos') }}</a>
                                 </li>
 								<li class="@yield('clase-active-actividades')">
-									<a href="/actividades">{{ __('Listado de Actividades') }}</a>
+									<a href="{{action('ActividadesController@index')}}">{{ __('Listado de Actividades') }}</a>
 								</li>
                                 <li class="@yield('clase-active')">
                                     <a href="/estadoproyecto">{{ __('Estado de Proyecto') }}</a>
@@ -257,16 +257,11 @@
                                     <a href="/">{{ __('Mantenimiento de Tablas') }}</a>
                                 </li>
                                 <li class="@yield('clase-active-usuarios')">
-                                    <a href="/administracion/usuarios">{{ __('Mantenimiento de Usuarios') }}</a>
+                                    <a href="{{action('UsuariosController@index')}}">{{ __('Mantenimiento de Usuarios') }}</a>
                                 </li>
 						</ul>
 					</li>
-					<li class="@yield('clase-active')">
-						<a href="/noticias">
-							<i class="fa fa-newspaper"></i>
-							<span>Noticias</span>
-						</a>
-					</li>
+
 
 					<!-- begin sidebar minify button -->
 					<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
@@ -412,6 +407,29 @@
 
 	});
 
+	$('[data-click="swal-danger-proyectos"]').click(function (e) {
+
+		swal({
+			title: "Desea eliminar registro?",
+			text: "Recuerde que si elimina el registro, no se puede recuperar",
+			icon: "error",
+			buttons: {
+				cancel: {text: "Cancelar", value: null, visible: !0, className: "btn btn-default", closeModal: !0},
+				confirm: {text: "Eliminar", value: !0, visible: !0, className: "btn btn-danger", closeModal: !0}
+			}
+		}).then((willDelete) => {
+			if (willDelete) {
+				$('#btn-proyectos-delete').click();
+				swal("Registro Eliminado!", {
+					icon: "success",
+				});
+			} else {
+				swal("Cancelo!");
+			}
+		});
+
+	});
+
     $('.alert[data-auto-dismiss]').each(function (index, element) {
         var $element = $(element),
             timeout  = $element.data('auto-dismiss') || 5000;
@@ -420,6 +438,23 @@
             $element.alert('close');
         }, timeout);
     });
+
+			$("select[name='id_carpetaprincipal']").change(function(){
+				let codigo = $(this).val();
+				let id_proyecto = $("input[name='id_proyecto']").val();
+				let token = $("input[name='_token']").val();
+				$.ajax({
+					url: "<?php echo route('select-ajax') ?>",
+					method: 'POST',
+					data: {codigo:codigo,id_proyecto:id_proyecto, _token:token},
+					success: function(data) {
+						$("select[name='id_carpetasecundaria']").html('');
+						$("select[name='id_carpetasecundaria']").html(data.options);
+						$("select[name='id_carpetasecundaria']").selectpicker('refresh');
+
+					}
+				});
+			});
 
 </script>
 

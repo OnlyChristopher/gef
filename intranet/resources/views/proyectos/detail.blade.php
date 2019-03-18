@@ -1,16 +1,18 @@
 @extends('layouts.app')
-@section('title', 'Detalles | Proyectos |')
+@section('title', 'Proyectos | Detalles |')
 @section('clase-open-proyecto','expand')
 @section('clase-active-proyecto','active')
 @section('clase-active-proyectos','active')
 @section('content')
     <!-- begin breadcrumb -->
     <ol class="breadcrumb hidden-print pull-right">
-        <li class="breadcrumb-item"><a href="javascript:window.history.back()">Proyectos</a></li>
+        <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="javascript:window.history.back()">Listado de Proyectos</a></li>
         <li class="breadcrumb-item active">Detalle de Proyectos</li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
+
     <h1 class="page-header hidden-print">Detalle de Proyectos </h1>
     <!-- end page-header -->
     <!-- begin invoice -->

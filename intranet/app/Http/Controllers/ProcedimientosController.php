@@ -163,6 +163,6 @@ class ProcedimientosController extends Controller
     public function file($id)
     {
 		$dl = DB::table('procedimientos')->where('id', $id)->first();
-	    return response()->download("../storage/app/$dl->id_area/pdf_proc/$dl->codigo/$dl->pdf_proc");
+	    return response()->download("../intranet/storage/app/$dl->id_area/pdf_proc/$dl->codigo/$dl->pdf_proc");
     }
 }
