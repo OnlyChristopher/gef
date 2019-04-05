@@ -19,8 +19,10 @@
     <div class="panel panel-inverse">
         <div class="panel-heading">
             <div class="panel-heading-btn">
-                <a class="btn btn-green btn-xs" href="{{action('ProyectosController@create')}}">Crear nuevo
-                    proyecto</a>
+                @if( Auth::user()->profile == 1|| Auth::user()->profile == 2)
+                    <a class="btn btn-green btn-xs" href="{{action('ProyectosController@create')}}">Crear nuevo
+                        proyecto</a>
+                @endif
             </div>
             <h4 class="panel-title">Proyectos</h4>
         </div>
@@ -42,8 +44,7 @@
                                     <th>Nombre</th>
                                     <th>Periodo</th>
                                     <th>Duracion</th>
-                                    <th>Esado</th>
-                                    <th>Comentarios</th>
+                                    <th>Estado</th>
                                     <th width="140x">Acciones</th>
                                 </tr>
 
@@ -61,25 +62,26 @@
                                                 Caducado
                                             @endif
                                         </td>
-                                        <td>{{$proyecto->comentarios}}</td>
                                         <td>
                                             <form action="{{ route('proyectos.destroy', $proyecto->id_proyecto) }}"
                                                   method="post">
                                                 <a class="btn btn-icon btn-circle btn-info" href="{{route('proyectos.show',$proyecto->id_proyecto)}}" data-toggle="tooltip" data-container="body" data-title="Detalle" data-original-title="" title=""><i class="fab fa-envira"></i></a>
-                                                <a class="btn btn-icon btn-circle btn-warning"
-                                                   href="{{route('proyectos.edit',$proyecto->id_proyecto)}}"
-                                                   data-toggle="tooltip" data-container="body" data-id-="{{$proyecto->id_proyecto}}" data-title="Editar"><i
-                                                            class="fa fa-pencil-alt"></i></a>
-                                                @csrf
-                                                @method('DELETE')
-                                             {{--   <a href="javascript:;" data-click="swal-danger-proyectos"
-                                                   class="btn btn-icon btn-circle btn-danger" data-toggle="tooltip"
-                                                   data-container="body" data-title="Eliminar"><i
-                                                            class="fa fa-trash-alt"></i></a>--}}
-                                                <button id="btn-proyectos-delete"  type="submit"
-                                                        class="btn btn-icon btn-circle btn-danger"><i
-                                                            class="fa fa-trash-alt"></i>
-                                                </button>
+                                                @if( Auth::user()->profile == 1|| Auth::user()->profile == 2)
+                                                    <a class="btn btn-icon btn-circle btn-warning"
+                                                       href="{{route('proyectos.edit',$proyecto->id_proyecto)}}"
+                                                       data-toggle="tooltip" data-container="body" data-id-="{{$proyecto->id_proyecto}}" data-title="Editar"><i
+                                                                class="fa fa-pencil-alt"></i></a>
+                                                    @csrf
+                                                    @method('DELETE')
+                                                 {{--   <a href="javascript:;" data-click="swal-danger-proyectos"
+                                                       class="btn btn-icon btn-circle btn-danger" data-toggle="tooltip"
+                                                       data-container="body" data-title="Eliminar"><i
+                                                                class="fa fa-trash-alt"></i></a>--}}
+                                                    <button id="btn-proyectos-delete"  type="submit"
+                                                            class="btn btn-icon btn-circle btn-danger"><i
+                                                                class="fa fa-trash-alt"></i>
+                                                    </button>
+                                                @endif
                                             </form>
                                         </td>
                                     </tr>

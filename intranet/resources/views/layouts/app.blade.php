@@ -29,6 +29,8 @@
 
 	<!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
 	<link href="{{ asset('assets/plugins/bootstrap-select/bootstrap-select.min.css') }}" rel="stylesheet" />
+	<link href="{{ asset('assets/plugins/select2/dist/css/select2.min.css') }}" rel="stylesheet" />
+
 	<link href="{{ asset('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css') }}" rel="stylesheet" />
 	<link href="{{ asset('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.css') }}" rel="stylesheet" />
 	<link href="{{ asset('assets/plugins/jstree/dist/themes/default/style.min.css') }}" rel="stylesheet" />
@@ -149,7 +151,9 @@
 						<span class="d-none d-md-inline">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span> <b class="caret"></b>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right">
-                        <a href="{{ route('register') }}" class="dropdown-item">Registrar Usuarios</a>
+						@if(Auth::user()->profile == 1)
+							<a href="{{ route('register') }}" class="dropdown-item">Registrar Usuarios</a>
+						@endif
 						<div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
@@ -203,7 +207,8 @@
 					    <span>Inicio</span>
 					    </a>
 					</li>
-					<li class="has-sub @yield('clase-open-documentos') @yield('clase-active-documentos')">
+                    @if(Auth::user()->profile == 1 || Auth::user()->profile == 2)
+                    <li class="has-sub active @yield('clase-open-documentos') @yield('clase-active-documentos')">
 						<a href="javascript:;">
 							<b class="caret"></b>
 							<i class="fa fa-align-left"></i>
@@ -225,7 +230,9 @@
 								@endforeach
 						</ul>
 					</li>
-					<li class="has-sub @yield('clase-open-proyecto') @yield('clase-active-proyecto')">
+                    @endif
+                    @if(Auth::user()->profile == 1 || Auth::user()->profile == 2 || Auth::user()->profile == 3 )
+					<li class="has-sub active @yield('clase-open-proyecto') @yield('clase-active-proyecto')">
 						<a href="javascript:;">
 							<b class="caret"></b>
 							<i class="fa fa-th-large"></i>
@@ -235,33 +242,35 @@
                                 <li class="@yield('clase-active-proyectos')">
                                     <a href="{{action('ProyectosController@index')}}">{{ __('Listado de Proyectos') }}</a>
                                 </li>
+							@if(Auth::user()->profile == 1 || Auth::user()->profile == 2)
 								<li class="@yield('clase-active-actividades')">
 									<a href="{{action('ActividadesController@index')}}">{{ __('Listado de Actividades') }}</a>
 								</li>
-                                <li class="@yield('clase-active')">
-                                    <a href="/estadoproyecto">{{ __('Estado de Proyecto') }}</a>
+							@endif
+                                <li class="@yield('clase-active-temporales')">
+                                    <a href="{{action('TemporalesController@index')}}">{{ __('Documentos Temporales') }}</a>
                                 </li>
-                                <li class="@yield('clase-active')">
-                                    <a href="/notificaciones">{{ __('Notificaciones') }}</a>
-                                </li>
+
 						</ul>
 					</li>
-					<li class="has-sub @yield('clase-open-usuarios') @yield('clase-active-usuarios')">
+                    @endif
+                    @if(Auth::user()->profile == 1)
+					<li class="has-sub @yield('clase-open-administracion') @yield('clase-active-administracion')">
 						<a href="javascript:;">
 							<b class="caret"></b>
 							<i class="fa fa-th-large"></i>
 							<span>Administración</span>
 						</a>
 						<ul class="sub-menu" style="display: @yield('clase-block-usuarios');">
-                                <li class="@yield('clase-active-tablas')">
-                                    <a href="/">{{ __('Mantenimiento de Tablas') }}</a>
+                                <li class="@yield('clase-active-clientes')">
+                                    <a href="{{action('ClientesController@index')}}">{{ __('Mantenimiento de Clientes') }}</a>
                                 </li>
                                 <li class="@yield('clase-active-usuarios')">
                                     <a href="{{action('UsuariosController@index')}}">{{ __('Mantenimiento de Usuarios') }}</a>
                                 </li>
 						</ul>
 					</li>
-
+                    @endif
 
 					<!-- begin sidebar minify button -->
 					<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
@@ -288,7 +297,7 @@
 
 		<!-- begin #footer -->
 		<div id="footer" class="footer">
-			&copy; 2019 Monitoreos - All Rights Reserved
+			&copy; 2019 GreEngField - All Rights Reserved
 		</div>
 		<!-- end #footer -->
 
@@ -320,6 +329,7 @@
 <script src="{{ asset('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
 <script src="{{ asset('assets/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js') }}" charset="UTF-8"></script>
 <script src="{{ asset('assets/plugins/bootstrap-select/bootstrap-select.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/select2/dist/js/select2.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/bootstrap-sweetalert/sweetalert.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/jstree/dist/jstree.min.js') }}"></script>
 
@@ -328,6 +338,11 @@
     $(document).ready(function() {
         App.init();
 		TreeView.init();
+		$(".multiple-select2").select2({
+			placeholder: "Seleccione Usuarios"
+		});
+        console.log("%c Site developed with -   by  @OnlyChristopher " ,"background: #32a932; padding:5px; font-size: 12px; color: #ffffff");
+
     });
 	$("#fecha_proc").datepicker({
 		language: 'es',
@@ -407,6 +422,54 @@
 
 	});
 
+	$('[data-click="swal-danger-temporales"]').click(function (e) {
+		swal({
+			title: "Desea eliminar registro?",
+			text: "Recuerde que si elimina el registro, no se puede recuperar",
+			icon: "error",
+			buttons: {
+				cancel: {text: "Cancelar", value: null, visible: !0, className: "btn btn-default", closeModal: !0},
+				confirm: {text: "Eliminar", value: !0, visible: !0, className: "btn btn-danger", closeModal: !0}
+			}
+		}).then((willDelete) => {
+			if (willDelete) {
+				let id = $(this).data('id');
+				//console.log(id);
+				$('#btn-temporales-delete'+'-'+id).click();
+				swal("Registro Eliminado!", {
+					icon: "success",
+				});
+			} else {
+				swal("Cancelo!");
+			}
+		});
+
+	});
+
+	$('[data-click="swal-danger-folders"]').click(function (e) {
+		swal({
+			title: "Desea eliminar registro?",
+			text: "Recuerde que si elimina la carpeta , se eliminaran los archivos y no podra recuperarlos, se recomienda descargar los archivos",
+			icon: "error",
+			buttons: {
+				cancel: {text: "Cancelar", value: null, visible: !0, className: "btn btn-default", closeModal: !0},
+				confirm: {text: "Eliminar", value: !0, visible: !0, className: "btn btn-danger", closeModal: !0}
+			}
+		}).then((willDelete) => {
+			if (willDelete) {
+				let id = $(this).data('id');
+				//console.log(id);
+				$('#btn-folders-delete'+'-'+id).click();
+				swal("Registro Eliminado!", {
+					icon: "success",
+				});
+			} else {
+				swal("Cancelo!");
+			}
+		});
+
+	});
+
 	$('[data-click="swal-danger-proyectos"]').click(function (e) {
 
 		swal({
@@ -432,29 +495,84 @@
 
     $('.alert[data-auto-dismiss]').each(function (index, element) {
         var $element = $(element),
-            timeout  = $element.data('auto-dismiss') || 5000;
+            timeout  = $element.data('auto-dismiss') || 8000;
 
         setTimeout(function () {
             $element.alert('close');
         }, timeout);
     });
 
-			$("select[name='id_carpetaprincipal']").change(function(){
-				let codigo = $(this).val();
-				let id_proyecto = $("input[name='id_proyecto']").val();
-				let token = $("input[name='_token']").val();
-				$.ajax({
-					url: "<?php echo route('select-ajax') ?>",
-					method: 'POST',
-					data: {codigo:codigo,id_proyecto:id_proyecto, _token:token},
-					success: function(data) {
-						$("select[name='id_carpetasecundaria']").html('');
-						$("select[name='id_carpetasecundaria']").html(data.options);
-						$("select[name='id_carpetasecundaria']").selectpicker('refresh');
+	$("select[name='id_carpetaprincipal']").change(function(){
+		let codigo = $(this).val();
+		let id_proyecto = $("input[name='id_proyecto']").val();
+		let token = $("input[name='_token']").val();
+		$.ajax({
+			url: "<?php echo route('select-ajax') ?>",
+			method: 'POST',
+			data: {codigo:codigo,id_proyecto:id_proyecto, _token:token},
+			success: function(data) {
+				$("select[name='id_carpetasecundaria']").html('');
+				$("select[name='id_carpetasecundaria']").html(data.options);
+				$("select[name='id_carpetasecundaria']").selectpicker('refresh');
 
-					}
-				});
-			});
+			}
+		});
+	});
+
+	let edit_folder = function (id) {
+		let url = "{{ route('carpetasProyectosEdit', ':id') }}";
+		url = url.replace(':id', id);
+
+		let urlTwo = "{{ route('fileCarpetasProyectosShow',':id') }}";
+		urlTwo = urlTwo.replace(':id', id);
+
+
+		$('#id_carpetasecundaria').val(url);
+		$('#id_archivos').val(urlTwo);
+
+	};
+
+	let detail_folder = function(proyecto,id){
+		let url ="{{ route('carpetasProyectosList', ['proyecto' => ':proyecto' , 'id' => ':id'])}}"
+
+		//console.log(url);
+		url = url.replace(':id',id);
+		url = url.replace(':proyecto',proyecto);
+
+
+		$('#id_carpetaprincipal').val(url);
+	}
+
+	$('.edit-folder').on('click',function () {
+		let url = $('#id_carpetasecundaria').val();
+
+		if(url){
+			document.location.href=url;
+		}else{
+			alert('Seleccione carpeta a editar');
+		}
+	});
+
+	$('.edit-file').on('click',function () {
+		let url = $('#id_archivos').val();
+
+		if(url){
+			document.location.href=url;
+		}else{
+			alert('Seleccione carpeta a editar');
+		}
+	});
+
+	$('.detail-folder').on('click',function(){
+		let url = $('#id_carpetaprincipal').val();
+
+		if(url){
+			document.location.href=url;
+		}else{
+			alert('Seleccione carpeta principal');
+		}
+	})
+
 
 </script>
 

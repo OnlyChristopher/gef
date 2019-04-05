@@ -23,6 +23,7 @@ class ProyectosController extends Controller
     public function index()
     {
         $proyectos =    DB::table('proyectos')
+	                    ->orderBy('id_proyecto','desc')
                         ->paginate(10);
         return view('proyectos.index', ['proyectos' => $proyectos]);
 
@@ -53,7 +54,6 @@ class ProyectosController extends Controller
 	    $periodo_ejecucion      = $request->input('periodo_ejecucion');
         $duracion               = $request->input('duracion');
         $estado_proyecto        = $request->input('estado_proyecto');
-        $comentarios            = $request->input('comentarios');
         $carpetas               = $request->input('carpetas');
         $usuario_creacion       = $request->input('id_user');
         $fecha_creacion         = $this->dateformt;
@@ -79,7 +79,6 @@ class ProyectosController extends Controller
 	                    'periodo_ejecucion'     => $periodo_ejecucion,
 	                    'duracion'              => $duracion,
 	                    'estado_proyecto'       => $estado_proyecto,
-                        'comentarios'           => $comentarios,
                         'carpetas'              => $carpetas,
 	                    'usuario_creacion'      => $usuario_creacion,
 	                    'fecha_creacion'        => $fecha_creacion
@@ -132,7 +131,6 @@ class ProyectosController extends Controller
 	    $periodo_ejecucion      = $request->input('periodo_ejecucion');
 	    $duracion               = $request->input('duracion');
 	    $estado_proyecto        = $request->input('estado_proyecto');
-	    $comentarios            = $request->input('comentarios');
 	    $carpetas               = $request->input('carpetas');
 	    $usuario_creacion       = $request->input('id_user');
 	    $fecha_creacion         = $this->dateformt;
@@ -153,7 +151,6 @@ class ProyectosController extends Controller
 	                  'periodo_ejecucion'       => $periodo_ejecucion,
 	                  'duracion'                => $duracion,
 	                  'estado_proyecto'         => $estado_proyecto,
-	                  'comentarios'             => $comentarios,
 	                  'carpetas'                => $carpetas,
 	                  'usuario_actualizo'      => $usuario_creacion,
 	                  'fecha_actualizo'        => $fecha_creacion

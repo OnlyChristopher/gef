@@ -6,9 +6,9 @@
 
 <head><meta http-equiv="Content-Type" content="text/html; charset=gb18030">
     
-    <title>Iniciar Sesión | Monitoreos</title>
+    <title>Iniciar Sesión | GreEngField</title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
-    <meta content="" name="description" />
+    <meta content="Intranet, GreEngField, Documentos, Archivor" name="description" />
     <meta content="@OnlyChristopher" name="author" />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">

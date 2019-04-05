@@ -40,7 +40,9 @@ class ActividadesController extends Controller
      */
     public function create()
     {
-        //
+        $proyectos  =   DB::table('proyectos')->get();
+		$estados    =   DB::table('estados')->get();
+    	return view('proyectos.actividades.create', ['proyectos' => $proyectos, 'estados' => $estados]);
     }
 
     /**
@@ -51,7 +53,49 @@ class ActividadesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $id_proyecto        = $request->input('id_proyecto');
+	    $nombre_actividades = $request->input('nombre_actividades');
+	    $cod_proyecto       = $request->input('cod_proyecto');
+	    $requisicion        = $request->input('requisicion');
+	    $osc                = $request->input('osc');
+	    $bases              = $request->input('bases');
+	    $comprador          = $request->input('comprador');
+	    $costo_presupuestado = $request->input('costo_presupuestado');
+	    $id_estado          = $request->input('id_estado');
+	    $adjudicado         = $request->input('adjudicado');
+	    $tiempo_ejecucion   = $request->input('tiempo_ejecucion');
+	    $fr043              = $request->input('fr043');
+	    $movilizado         = $request->input('movilizado');
+	    $operador           = $request->input('operador');
+	    $visita_terreno     = $request->input('visita_terreno');
+	    $comentarios        = $request->input('comentarios');
+	    $usuario_creacion   = $request->input('id_user');
+	    $fecha_creacion = $this->dateformt;
+
+	    $data = array('id_proyecto' => $id_proyecto,
+		                'nombre_actividades' => $nombre_actividades,
+		                'cod_proyecto' => $cod_proyecto,
+		                'requisicion' => $requisicion,
+		                'osc' => $osc,
+		                'bases' => $bases,
+		                'comprador' => $comprador,
+		                'costo_presupuestado' => $costo_presupuestado,
+		                'id_estado' => $id_estado,
+		                'adjudicado' => $adjudicado,
+		                'tiempo_ejecucion' => $tiempo_ejecucion,
+		                'fr043' => $fr043,
+		                'movilizado' => $movilizado,
+		                'operador' => $operador,
+		                'visita_terreno' => $visita_terreno,
+		                'comentarios' => $comentarios,
+		                'usuario_creacion' => $usuario_creacion,
+		                'fecha_creacion' => $fecha_creacion
+		                );
+
+	    DB::table('actividades')->insert($data);
+	    return redirect()->route('actividades.index')
+	                     ->with('success','Registro Exitoso');
+
     }
 
     /**
@@ -73,7 +117,13 @@ class ActividadesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $actividades = DB::table('actividades')
+                         ->where('id_actividades',$id)
+                         ->first();
+	    $proyectos  =   DB::table('proyectos')->get();
+	    $estados    =   DB::table('estados')->get();
+        return view('proyectos.actividades.edit', ['actividades' => $actividades, 'proyectos' => $proyectos, 'estados' => $estados]);
+
     }
 
     /**
@@ -96,6 +146,8 @@ class ActividadesController extends Controller
      */
     public function destroy($id)
     {
-        //
+	    DB::table('actividades')->where('id_actividades', $id)->delete();
+	    return redirect()->route('actividades.index')
+	                     ->with('success', 'Registro eliminado correctamente');
     }
 }

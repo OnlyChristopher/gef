@@ -39,7 +39,7 @@
                             <label class="col-md-3 text-md-right col-form-label" for="id_areas">Carpetas Principales</label>
                             <div class="col-md-6">
                                 <select  name="id_carpetaprincipal" id="id_carpetaprincipal" class="form-control selectpicker" data-live-search="true" data-style="btn-white" data-parsley-required="true" data-parsley-required-message="Por favor Seleccione Carpeta">
-                                    <option>--- Seleccionar Carpeta ---</option>
+                                    <option value="">--- Seleccionar Carpeta ---</option>
                                     @foreach ($carpetas as $carpeta)
                                         <option value="{{$carpeta->id}}" >{{$carpeta->nombre}}</option>
                                     @endforeach
@@ -49,8 +49,8 @@
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="id_areas"></label>
                             <div class="col-md-6">
-                                <select  name="id_carpetasecundaria" id="id_carpetasecundaria" class="form-control selectpicker" data-live-search="true" data-style="btn-white" data-parsley-required="true" data-parsley-required-message="Por favor Seleccione Carpeta">
-                                    <option>--- Seleccionar Carpeta ---</option>
+                                <select  name="id_carpetasecundaria" id="id_carpetasecundaria" class="form-control selectpicker" data-live-search="true" data-style="btn-white" >
+                                    <option value="">--- Seleccionar Carpeta ---</option>
                                 </select>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="nombre">Nuevo Archivo</label>
                             <div class="col-md-6">
-                                <input type="file" accept="*"  name="file" id="file" placeholder="Seleccione Archivo" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Seleccione Archivo">
+                                <input type="file" accept="*" multiple  name="files[]" id="files" placeholder="Seleccione Archivo" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Seleccione Archivo">
                             </div>
                         </div>
 

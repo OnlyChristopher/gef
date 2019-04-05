@@ -69,12 +69,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row m-b-10">
-                            <label class="col-md-3 text-md-right col-form-label" for="comentarios">Comentarios</label>
-                            <div class="col-md-6">
-                                <textarea name="comentarios" id="comentarios" placeholder="Comentarios" class="form-control" rows="3" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Comentario" ></textarea>
-                            </div>
-                        </div>
+
 
 
                         <div class="form-group row m-b-10">

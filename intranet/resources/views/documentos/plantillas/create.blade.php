@@ -1,8 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Documentos | Plantillas |')
-@section('clase-open-documentos','expand')
+@section('title', 'Documentos | Plantillas | Crear |')
 @section('clase-active-documentos','active')
-@section('clase-active-plantillas','active')
+@section('clase-open-documentos-'.$areas[0]->id_area.'','expand')
+@section('clase-active-documentos-'.$areas[0]->id_area.'','active')
+@section('clase-active-plantillas-'.$areas[0]->id_area.'','active')
 @section('content')
     <!-- begin breadcrumb -->
     <ol class="breadcrumb pull-right">

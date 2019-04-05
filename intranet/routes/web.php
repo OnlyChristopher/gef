@@ -51,12 +51,24 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::resource('carpetas', 'CarpetasController');
 	Route::get('proyectos/carpetas/{id}', 'CarpetasController@index')->name('carpetasProyectos');
-
-	Route::get('proyectos/carpetas/create/{id}', 'CarpetasController@create')->name('carpetasProyectosCreate');
+    Route::get('proyectos/carpetas/create/{id}', 'CarpetasController@create')->name('carpetasProyectosCreate');
+    Route::get('proyectos/carpetas/{proyecto}/folder/show/{id?}', 'CarpetasController@listfolder')->name('carpetasProyectosList');
+	Route::get('proyectos/carpetas/folder/edit/{id}', 'CarpetasController@edit')->name('carpetasProyectosEdit');
+	Route::delete('proyectos/carpetas/folder/delete/{id}', 'CarpetasController@destroyfolder')->name('carpetasProyectosDelete');
 	Route::get('proyectos/carpetas/file/{id}', 'CarpetasController@file')->name('fileCarpetasProyectosCreate');
+	Route::get('proyectos/carpetas/file/show/{id}', 'CarpetasController@show')->name('fileCarpetasProyectosShow');
 	Route::post('proyectos/carpetas/file', 'CarpetasController@filestore')->name('fileStore');
-
+	Route::get('file/carpetas/download/{id}','CarpetasController@downloadFile')->name('downloadArchiveProyectos');
 	Route::post('select-ajax', ['as'=>'select-ajax','uses'=>'CarpetasController@carpetasSecundarias']);
+
+	Route::resource('temporales', 'TemporalesController');
+	Route::get('/filetemporales/download/{id}','TemporalesController@file')->name('downloadfileTemporales');
+
+	Route::resource('clientes', 'ClientesController');
+
+	Route::resource('notificaciones', 'NotificacionesController');
+	Route::get('notificaciones/create/{id}', 'NotificacionesController@create')->name('notifiacionesTemporalCreate');
+
 
 
 

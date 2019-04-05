@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Administracion | Usuarios |')
-@section('clase-open-usuarios','expand')
+@section('clase-active-administracion','active')
 @section('clase-block-usuarios','block')
 @section('clase-active-usuarios','active')
 @section('content')
@@ -51,11 +51,10 @@
                             <td>{{$usuario->lastname}}</td>
                             <td>{{$usuario->email}}</td>
                             <td>{{$usuario->dni}}</td>
-                            <td>{{$usuario->job}}</td>
-                            <td>{{$usuario->access}}</td>
+                            <td>{{$usuario->nombre}}</td>
+                            <td>{{$usuario->nameprofile}}</td>
                             <td>
                                 <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="post">
-                                    <a class="btn btn-sm btn-success" href="{{route('usuarios.show',$usuario->id)}}">Show</a>
                                     <a class="btn btn-sm btn-warning" href="{{route('usuarios.edit',$usuario->id)}}">Edit</a>
                                     @csrf
                                     @method('DELETE')

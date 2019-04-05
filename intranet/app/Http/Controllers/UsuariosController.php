@@ -14,7 +14,11 @@ class UsuariosController extends Controller
      */
     public function index()
     {
-	    $users = DB::table('users')->paginate(15);
+	    $users = DB::table('users')
+	               ->join('profiles','profiles.codprofile','=','users.profile')
+		           ->join('positions','positions.id','=','users.position')
+		           ->select('users.*','profiles.nameprofile','positions.nombre')
+		           ->paginate(15);
 
 	    return view('administracion.usuarios.index', ['users' => $users]);
     }

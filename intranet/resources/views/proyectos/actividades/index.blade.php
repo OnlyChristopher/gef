@@ -7,7 +7,7 @@
 @section('content')
     <!-- begin breadcrumb -->
     <ol class="breadcrumb pull-right">
-        <li class="breadcrumb-item active"><a href="javascript:;">Actividades</a></li>
+        <li class="breadcrumb-item active"><a href="javascript:;">Listado de Actividades</a></li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
@@ -45,6 +45,15 @@
                                 <th>OSC</th>
                                 <th>Bases</th>
                                 <th>Comprador</th>
+                                <th>Costo Presupuestado</th>
+                                <th>Estado</th>
+                                <th>Adjudicado</th>
+                                <th>Tiempo</th>
+                                <th>fr043</th>
+                                <th>Movilizado</th>
+                                <th>Operador</th>
+                                <th>Visita</th>
+                                <th>Comentarios</th>
                                 <th width="90px">Acciones</th>
                             </tr>
                            
@@ -58,16 +67,15 @@
                                     <td>{{$actividad->osc}}</td>
                                     <td>{{$actividad->bases}}</td>
                                     <td>{{$actividad->comprador}}</td>
-                                    {{-- <td>
-                                        @if ($actividad->estado_proyecto == 0)
-                                            Vigente
-                                        @else
-                                            Caducado    
-                                        @endif
-                                    </td>
-                                    <td>{{$actividad->notificacion}}</td>
+                                    <td>{{$actividad->costo_presupuestado}}</td>
+                                    <td>{{$actividad->id_estado}}</td>
+                                    <td>{{$actividad->adjudicado}}</td>
+                                    <td>{{$actividad->tiempo_ejecucion}}</td>
+                                    <td>{{$actividad->fr043}}</td>
+                                    <td>{{$actividad->movilizado}}</td>
+                                    <td>{{$actividad->operador}}</td>
+                                    <td>{{$actividad->visita_terreno}}</td>
                                     <td>{{$actividad->comentarios}}</td>
-                                     --}}
                                   
                                    
                                     {{-- <td>
@@ -81,20 +89,17 @@
                                         @endif
                                     </td> --}}
                                     <td>
-                                        <form action="{{ route('actividades.destroy', $actividad->id_proyecto) }}"
+                                        <form action="{{ route('actividades.destroy', $actividad->id_actividades) }}"
                                               method="post">
                                             <a class="btn btn-icon btn-circle btn-warning"
-                                               href="{{route('actividades.edit',$actividad->id_proyecto)}}"
+                                               href="{{route('actividades.edit',$actividad->id_actividades)}}"
                                                data-toggle="tooltip" data-container="body" data-title="Editar"><i
                                                         class="fa fa-pencil-alt"></i></a>
                                             @csrf
                                             @method('DELETE')
-                                            <a href="javascript:;" data-click="swal-danger-actividades"
-                                               class="btn btn-icon btn-circle btn-danger" data-toggle="tooltip"
-                                               data-container="body" data-title="Eliminar"><i
-                                                        class="fa fa-trash-alt"></i></a>
-                                            <button id="btn-actividades-delete" style="display: none" type="submit"
-                                                    class="btn btn-sm btn-danger">Delete
+                                            <button id="btn-proyectos-delete"  type="submit"
+                                                    class="btn btn-icon btn-circle btn-danger" data-toggle="tooltip" data-container="body" data-id-="{{$actividad->id_actividades}}" data-title="Eliminar"><i
+                                                        class="fa fa-trash-alt"></i>
                                             </button>
                                         </form>
                                     </td>

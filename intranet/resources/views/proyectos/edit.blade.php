@@ -6,6 +6,7 @@
 @section('content')
     <!-- begin breadcrumb -->
     <ol class="breadcrumb pull-right">
+        <li class="breadcrumb-item"><a href="/">Inicio</a></li>
         <li class="breadcrumb-item active"><a href="javascript:;">Proyectos</a></li>
     </ol>
     <!-- end breadcrumb -->
@@ -70,12 +71,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row m-b-10">
-                            <label class="col-md-3 text-md-right col-form-label" for="comentarios">Comentarios</label>
-                            <div class="col-md-6">
-                                <textarea name="comentarios" id="comentarios" placeholder="Comentarios" class="form-control" rows="3" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Comentario" value="{{$proyectos->comentarios}}" ></textarea>
-                            </div>
-                        </div>
+
                         
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" >Crear carpetas</label>
