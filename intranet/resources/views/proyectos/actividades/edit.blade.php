@@ -34,14 +34,15 @@
                     </div>
                 @endif
                 <div class="col-md-8 offset-md-2">
-                    <form action="{{route('actividades.store')}}" method="post" enctype="multipart/form-data" data-parsley-validate="true" autocomplete="off" >
+                    <form action="{{route('actividades.update',$actividades->id_actividades)}}" method="post" enctype="multipart/form-data" data-parsley-validate="true" autocomplete="off" >
                         @csrf
+                        @method('PUT')
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="cliente">Proyecto</label>
                             <div class="col-md-6">
                                 <select  name="id_proyecto" id="id_proyecto" class="form-control selectpicker" data-live-search="true" data-style="btn-white" data-parsley-required="true" data-parsley-required-message="Por favor Seleccione Area">
                                     @foreach ($proyectos as $proyecto)
-                                        <option value="{{$proyecto->id_proyecto}}" >{{$proyecto->nombre_proyecto}}</option>
+                                        <option value="{{$proyecto->id_proyecto}}" {{ $actividades->id_proyecto == $proyecto->id_proyecto ? 'selected="selected"' : '' }} >{{$proyecto->nombre_proyecto}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -49,51 +50,51 @@
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="codigo">Nombre Actividad</label>
                             <div class="col-md-6">
-                                <input type="text" name="nombre_actividades" id="nombre_actividades" placeholder="Ingresa Actividad" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Actividad">
+                                <input type="text" name="nombre_actividades" id="nombre_actividades" placeholder="Ingresa Actividad" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Actividad" value="{{$actividades->nombre_actividades}}">
                             </div>
                         </div>
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="codigo">Codigo Proyecto</label>
                             <div class="col-md-6">
-                                <input type="text" name="cod_proyecto" id="cod_proyecto" placeholder="Ingresa Proyecto" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Codigo Proyecto">
+                                <input type="text" name="cod_proyecto" id="cod_proyecto" placeholder="Ingresa Proyecto" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Codigo Proyecto" value="{{$actividades->cod_proyecto}}" >
                             </div>
                         </div>
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="codigo">Requisicion</label>
                             <div class="col-md-6">
-                                <input type="text" name="requisicion" id="requisicion" placeholder="Ingresa Requisicion" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Requisicion">
+                                <input type="text" name="requisicion" id="requisicion" placeholder="Ingresa Requisicion" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Requisicion" value="{{$actividades->requisicion}}">
                             </div>
                         </div>
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="codigo">OSC</label>
                             <div class="col-md-6">
-                                <input type="text" name="osc" id="osc" placeholder="Ingresa OSC" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa OSC">
+                                <input type="text" name="osc" id="osc" placeholder="Ingresa OSC" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa OSC" value="{{$actividades->osc}}">
                             </div>
                         </div>
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="codigo">Bases</label>
                             <div class="col-md-6">
-                                <input type="text" name="bases" id="bases" placeholder="Ingresa Bases" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Bases">
+                                <input type="text" name="bases" id="bases" placeholder="Ingresa Bases" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Bases" value="{{$actividades->bases}}">
                             </div>
                         </div>
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="codigo">Comprador</label>
                             <div class="col-md-6">
-                                <input type="text" name="comprador" id="comprador" placeholder="Ingresa Comprador" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Comprador">
+                                <input type="text" name="comprador" id="comprador" placeholder="Ingresa Comprador" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Comprador" value="{{$actividades->comprador}}">
                             </div>
                         </div>
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="codigo">Costo Presupuestado</label>
                             <div class="col-md-6">
-                                <input type="text" name="costo_presupuestado" id="costo_presupuestado" placeholder="Ingresa Presupuestado" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Costo">
+                                <input type="text" name="costo_presupuestado" id="costo_presupuestado" placeholder="Ingresa Presupuestado" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Costo" value="{{$actividades->costo_presupuestado}}">
                             </div>
                         </div>
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="cliente">Estados</label>
                             <div class="col-md-6">
-                                <select  name="id_estado" id="id_estado" class="form-control selectpicker" data-live-search="true" data-style="btn-white" data-parsley-required="true" data-parsley-required-message="Por favor Seleccione Area">
+                                <select  name="id_estado" id="id_estado" class="form-control selectpicker" data-live-search="true" data-style="btn-white" data-parsley-required="true" data-parsley-required-message="Por favor Seleccione Estado">
                                     @foreach ($estados as $estado)
-                                        <option value="{{$estado->id_estado}}" >{{$estado->estado}}</option>
+                                        <option value="{{$estado->id_estado}}" {{ $actividades->id_estado == $estado->id_estado ? 'selected="selected"' : '' }}  >{{$estado->estado}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -101,37 +102,37 @@
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="codigo">Adjudicado</label>
                             <div class="col-md-6">
-                                <input type="text" name="adjudicado" id="adjudicado" placeholder="Ingresa Adjudicado" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Adjudicado">
+                                <input type="text" name="adjudicado" id="adjudicado" placeholder="Ingresa Adjudicado" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Adjudicado" value="{{$actividades->adjudicado}}">
                             </div>
                         </div>
                         <div class="form-group row m-b-10">
-                            <label class="col-md-3 text-md-right col-form-label" for="codigo">Timepo Ejecucion</label>
+                            <label class="col-md-3 text-md-right col-form-label" for="codigo">Tiempo Ejecucion</label>
                             <div class="col-md-6">
-                                <input type="text" name="tiempo_ejecucion" id="tiempo_ejecucion" placeholder="Ingresa Ejecucion" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Ejecucion">
+                                <input type="text" name="tiempo_ejecucion" id="tiempo_ejecucion" placeholder="Ingresa Ejecucion" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Ejecucion" value="{{$actividades->tiempo_ejecucion}}">
                             </div>
                         </div>
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="codigo">FR043</label>
                             <div class="col-md-6">
-                                <input type="text" name="fr043" id="fr043" placeholder="Ingresa FR043" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa FR043">
+                                <input type="text" name="fr043" id="fr043" placeholder="Ingresa FR043" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa FR043" value="{{$actividades->fr043}}">
                             </div>
                         </div>
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="codigo">Movilizado</label>
                             <div class="col-md-6">
-                                <input type="text" name="movilizado" id="movilizado" placeholder="Ingresa Movilizado" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Movilizado">
+                                <input type="text" name="movilizado" id="movilizado" placeholder="Ingresa Movilizado" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Movilizado" value="{{$actividades->movilizado}}">
                             </div>
                         </div>
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="codigo">Operador</label>
                             <div class="col-md-6">
-                                <input type="text" name="operador" id="operador" placeholder="Ingresa Operadpr" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Operadpr">
+                                <input type="text" name="operador" id="operador" placeholder="Ingresa Operadpr" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Operador" value="{{$actividades->operador}}">
                             </div>
                         </div>
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="codigo">Visita Terreno</label>
                             <div class="col-md-6">
-                                <input type="text" name="visita_terreno" id="visita_terreno" placeholder="Ingresa Terreno" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Terreno">
+                                <input type="text" name="visita_terreno" id="visita_terreno" placeholder="Ingresa Terreno" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Terreno" value="{{$actividades->visita_terreno}}">
                             </div>
                         </div>
 
@@ -139,7 +140,7 @@
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="version">Comentarios</label>
                             <div class="col-md-6">
-                                <textarea name="comentarios" id="comentarios" placeholder="Comentarios" class="form-control" rows="3" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Comentario" ></textarea>
+                                <textarea name="comentarios" id="comentarios" placeholder="Comentarios" class="form-control" rows="3" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Comentario" >{{$actividades->comentarios}}</textarea>
                             </div>
                         </div>
 

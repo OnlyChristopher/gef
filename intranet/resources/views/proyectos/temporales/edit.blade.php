@@ -1,12 +1,12 @@
 @extends('layouts.app')
-@section('title', 'Temporales | Proyecto |')
+@section('title', 'Temporales | Proyectos |')
 @section('clase-open-proyecto','expand')
 @section('clase-active-proyecto','active')
 @section('clase-active-temporales','active')
 @section('content')
     <!-- begin breadcrumb -->
     <ol class="breadcrumb pull-right">
-        <li class="breadcrumb-item active"><a href="javascript:;">Temporales</a></li>
+        <li class="breadcrumb-item active"><a href="{{route('temporales.index')}}">Temporales</a></li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
@@ -33,25 +33,39 @@
                     </div>
                 @endif
                 <div class="col-md-8 offset-md-2">
-                    <form action="{{route('temporales.store')}}" method="post" enctype="multipart/form-data" data-parsley-validate="true" autocomplete="off" >
+                    <form action="{{route('temporales.update', $temporales->id_temporal)}}" method="post" enctype="multipart/form-data" data-parsley-validate="true" autocomplete="off" >
                         @csrf
+                        @method('PUT')
                         <div class="form-group row m-b-10">
-                            <label class="col-md-3 text-md-right col-form-label" for="cliente">Cliente</label>
+                            <label class="col-md-3 text-md-right col-form-label" for="cliente">Proyecto</label>
                             <div class="col-md-6">
-                                <select  name="cliente" id="cliente" class="form-control selectpicker" data-live-search="true" data-style="btn-white" data-parsley-required="true" data-parsley-required-message="Por favor Seleccione Area">
-                                    @foreach ($clientes as $cliente)
-                                        <option value="{{$cliente->id_cliente}}" >{{$cliente->nombre_cliente}}</option>
+                                <select  name="id_proyecto" id="id_proyecto" class="form-control selectpicker" data-live-search="true" data-style="btn-white" data-parsley-required="true" data-parsley-required-message="Por favor Seleccione Area">
+                                    @foreach ($proyectos as $proyecto)
+                                        <option value="{{$proyecto->id_proyecto}}" >{{$proyecto->nombre_proyecto}} </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row m-b-10">
-                            <label class="col-md-3 text-md-right col-form-label" for="codigo">Proyecto</label>
+                            <label class="col-md-3 text-md-right col-form-label" for="cliente">Tipo Documento</label>
                             <div class="col-md-6">
-                                <input type="text" name="proyecto" id="proyecto" placeholder="Ingresa Proyecto" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Proyecto">
+                                <select  name="tipo_doc" id="tipo_doc" class="form-control selectpicker" data-live-search="true" data-style="btn-white" data-parsley-required="true" data-parsley-required-message="Por favor Seleccione Area">
+                                    @foreach ($documentos as $documento)
+                                        <option value="{{$documento->id_doc}}" >{{$documento->tipo_doc}} </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
-
+                        <div class="form-group row m-b-10">
+                            <label class="col-md-3 text-md-right col-form-label" for="cliente">Usuario Revisión</label>
+                            <div class="col-md-6">
+                                <select  name="usuario_revision" id="usuario_revision" class="form-control selectpicker" data-live-search="true" data-style="btn-white" data-parsley-required="true" data-parsley-required-message="Por favor Seleccione Area">
+                                    @foreach ($usuarios as $usuario)
+                                        <option value="{{$usuario->id}}" >{{$usuario->firstname}} {{$usuario->lastname}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="version">Comentarios</label>
                             <div class="col-md-6">
@@ -61,7 +75,7 @@
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="fecha_proc">Fecha</label>
                             <div class="col-md-6">
-                                <input type="text" name="fecha" id="fecha"  placeholder="Ingresa Fecha" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Fecha" value="{{$fecha}}">
+                                <input readonly type="text" name="fecha" id="fecha"  placeholder="Ingresa Fecha" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Fecha" value="{{$temporales->fecha_carga}}">
                             </div>
                         </div>
                         <input type="hidden" name="id_user" id="id_user" value="{{ Auth::user()->id }}">

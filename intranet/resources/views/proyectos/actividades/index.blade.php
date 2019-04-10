@@ -25,7 +25,7 @@
             <h4 class="panel-title">Actividades</h4>
         </div>
         <div class="panel-body">
-            <div class="container">
+            <div class="table-responsive">
 
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success fade show" data-auto-dismiss="2000">
@@ -33,7 +33,6 @@
                         <strong>{{$message}}</strong>
                     </div>
                 @endif
-                <div class="table-responsive">
                     @if(count($actividades))
                         <table class="table table-hover m-b-10">
                             <tr>
@@ -56,7 +55,7 @@
                                 <th>Comentarios</th>
                                 <th width="90px">Acciones</th>
                             </tr>
-                           
+
                             @foreach ($actividades as $actividad)
                                 <tr>
                                     <td><b>{{$actividad->id_actividades}}.</b></td>
@@ -76,8 +75,8 @@
                                     <td>{{$actividad->operador}}</td>
                                     <td>{{$actividad->visita_terreno}}</td>
                                     <td>{{$actividad->comentarios}}</td>
-                                  
-                                   
+
+
                                     {{-- <td>
                                         @if($actividad->cronograma)
                                             <a href="{{route('downloadfileProyectos', $actividad->id_proyecto)}}"
@@ -114,7 +113,6 @@
                         </div>
                     @endif
                 </div>
-            </div>
         </div>
     </div>
     <!-- end panel -->

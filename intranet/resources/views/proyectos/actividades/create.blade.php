@@ -105,7 +105,7 @@
                             </div>
                         </div>
                         <div class="form-group row m-b-10">
-                            <label class="col-md-3 text-md-right col-form-label" for="codigo">Timepo Ejecucion</label>
+                            <label class="col-md-3 text-md-right col-form-label" for="codigo">Tiempo Ejecucion</label>
                             <div class="col-md-6">
                                 <input type="text" name="tiempo_ejecucion" id="tiempo_ejecucion" placeholder="Ingresa Ejecucion" class="form-control" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Ejecucion">
                             </div>

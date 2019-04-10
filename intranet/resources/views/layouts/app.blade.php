@@ -152,7 +152,7 @@
 					</a>
 					<div class="dropdown-menu dropdown-menu-right">
 						@if(Auth::user()->profile == 1)
-							<a href="{{ route('register') }}" class="dropdown-item">Registrar Usuarios</a>
+							<a href="{{ route('usuarios.create') }}" class="dropdown-item">Registrar Usuarios</a>
 						@endif
 						<div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}"

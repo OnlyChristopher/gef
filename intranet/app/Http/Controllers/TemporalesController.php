@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use DB;
+use Illuminate\Http\Request;
+
 class TemporalesController extends Controller
 {
     /**
@@ -21,8 +22,11 @@ class TemporalesController extends Controller
     public function index()
     {
         $temporales = DB::table('temporales')
-                        ->join('clientes', 'clientes.id_cliente', '=', 'temporales.id_cliente')
-                        ->select('temporales.*','clientes.nombre_cliente')
+                        ->join('users as c', 'c.id', '=', 'temporales.usuario_carga')
+	                    ->join('users as r', 'r.id', '=', 'temporales.usuario_revision')
+	                    ->join('documentos', 'documentos.id_doc', '=', 'temporales.tipo_doc')
+	                    ->join('proyectos', 'proyectos.id_proyecto', '=', 'temporales.id_proyecto')
+                        ->select('temporales.*','c.firstname','c.lastname' , 'r.firstname as nombre','r.lastname as apellido','documentos.tipo_doc', 'proyectos.nombre_proyecto')
 	                    ->paginate(10);
 
 
@@ -36,8 +40,16 @@ class TemporalesController extends Controller
      */
     public function create()
     {
-    	$clientes = DB::table('clientes')->get();
-	    return view('proyectos.temporales.create', ['fecha' => $this->dateformt, 'clientes' => $clientes]);
+    	$usuarios       = DB::table('users')->get();
+    	$documentos     = DB::table('documentos')->get();
+    	$proyectos      = DB::table('proyectos')->get();
+
+	    return view( 'proyectos.temporales.create', [
+                                                      'fecha'      => $this->dateformt,
+	                                                  'usuarios'   => $usuarios,
+	                                                  'documentos' => $documentos,
+	                                                  'proyectos'  => $proyectos
+	    ] );
 
     }
 
@@ -49,22 +61,32 @@ class TemporalesController extends Controller
      */
     public function store(Request $request)
     {
-        $cliente            = $request->input('cliente');
-        $proyecto           = $request->input('proyecto');
+    	$usuario_carga      = $request->input('id_user');
+    	$tipo_doc           = $request->input('tipo_doc');
+        $id_proyecto           = $request->input('id_proyecto');
+	    $usuario_revision   = $request->input('usuario_revision');
         $comentarios        = $request->input('comentarios');
         $fecha              = $request->input('fecha');
         $documento          = $request->documento->getClientOriginalName();
         $id_user            = $request->input('id_user');
         $fecha_creacion     = $this->dateformt;
 
-        $request->documento->storeAs('temporales/'.$cliente,$documento);
+        $documentos = DB::table('documentos')->where('id_doc',$tipo_doc)->first();
+        $dias   = $documentos->vigencia_doc;
+        $fecha_vigencia = date("Y-m-d",strtotime($fecha_creacion."+ $dias days"));
 
-        $data =     array('id_cliente'          => $cliente,
-	                        'proyecto'          => $proyecto,
+        $request->documento->storeAs('temporales/'.$usuario_carga,$documento);
+
+        $data =     array(  'usuario_carga'     => $usuario_carga,
+	                        'id_proyecto'          => $id_proyecto,
+	                        'tipo_doc'          => $tipo_doc,
 	                        'nombre_archivo'    => $documento,
 	                        'comentarios'       => $comentarios,
 	                        'fecha_carga'       => $fecha,
+	                        'fecha_devolucion'  => $fecha_vigencia,
+	                        'estado'            => 'VIGENTE',
 	                        'documento'         => $documento,
+	                        'usuario_revision'  => $usuario_revision,
 	                        'usuario_creacion'  => $id_user,
 	                        'fecha_creacion'     => $fecha_creacion);
 
@@ -98,10 +120,14 @@ class TemporalesController extends Controller
         $temporales = DB::table('temporales')
                         ->where('id_temporal', $id)
                         ->first();
-        $clientes = DB::table('clientes')->get();
+	    $usuarios       = DB::table('users')->get();
+	    $documentos     = DB::table('documentos')->get();
+	    $proyectos      = DB::table('proyectos')->get();
 
 
-        return view('proyectos.temporales.edit', [ 'temporales' => $temporales, 'clientes' => $clientes, 'fecha' => $this->dateformt]);
+        //dd($temporales);
+
+        return view('proyectos.temporales.edit', [ 'temporales' => $temporales, 'usuarios'   => $usuarios,'documentos' => $documentos,'proyectos'  => $proyectos]);
     }
 
 	public function file($id)

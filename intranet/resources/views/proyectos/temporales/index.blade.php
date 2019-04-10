@@ -7,7 +7,7 @@
 @section('content')
     <!-- begin breadcrumb -->
     <ol class="breadcrumb pull-right">
-        <li class="breadcrumb-item active"><a href="javascript:;">Temporales</a></li>
+        <li class="breadcrumb-item active"><a href="{{route('temporales.index')}}">Listado Temporales</a></li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
@@ -24,7 +24,7 @@
             <h4 class="panel-title">Temporales</h4>
         </div>
         <div class="panel-body">
-            <div class="container">
+            <div class="table-responsive">
 
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success fade show" data-auto-dismiss="2000">
@@ -32,28 +32,38 @@
                         <strong>{{$message}}</strong>
                     </div>
                 @endif
-                <div class="table-responsive">
                     @if(count($temporales))
                         <table class="table table-hover m-b-10">
+                            <thead>
                             <tr>
                                 <th><b>No.</b></th>
-                                <th>Cliente</th>
-                                <th>Proyecto</th>
-                                <th>Nombre Archivo</th>
-                                <th>Comentarios</th>
-                                <th>Fecha Carga</th>
-                                <th>Documento</th>
+                                <th nowrap>Usuario Carga</th>
+                                <th nowrap>Proyecto</th>
+                                <th nowrap>Tipo Documento</th>
+                                <th nowrap>Nombre Archivo</th>
+                                <th nowrap>Comentarios</th>
+                                <th nowrap>Fecha Carga</th>
+                                <th nowrap>Usuario Revisión</th>
+                                <th nowrap>Fecha Devolución</th>
+                                <th nowrap>Estado</th>
+                                <th nowrap>Documento</th>
                                 <th width="125px">Acciones</th>
                             </tr>
+                            </thead>
 
                             @foreach ($temporales as $temporal)
                                 <tr>
                                     <td><b>{{$temporal->id_temporal}}.</b></td>
-                                    <td><b>{{$temporal->nombre_cliente}}</b></td>
-                                    <td>{{$temporal->proyecto}}</td>
-                                    <td>{{$temporal->nombre_archivo}}</td>
+                                    <td nowrap><b>{{$temporal->firstname}} {{$temporal->lastname}}</b></td>
+                                    <td nowrap>{{$temporal->nombre_proyecto}}</td>
+                                    <td nowrap>{{$temporal->tipo_doc}}</td>
+                                    <td nowrap>{{$temporal->nombre_archivo}}</td>
                                     <td>{{$temporal->comentarios}}</td>
                                     <td>{{$temporal->fecha_carga}}</td>
+                                    <td>{{$temporal->nombre}} {{$temporal->apellido}}</td>
+                                    <td>{{$temporal->fecha_devolucion}}</td>
+                                    <td>{{$temporal->estado}}</td>
+
                                     <td>
                                         @if($temporal->documento)
                                             <a href="{{ route('downloadfileTemporales', $temporal->id_temporal)}}"
@@ -63,7 +73,7 @@
                                             </a>
                                         @endif
                                     </td>
-                                    <td>
+                                    <td nowrap>
                                         <form action="{{ route('temporales.destroy', $temporal->id_temporal) }}"
                                               method="post">
                                             <a class="btn btn-icon btn-circle btn-purple"
@@ -95,7 +105,6 @@
                             <strong>No hay registros</strong>
                         </div>
                     @endif
-                </div>
             </div>
         </div>
     </div>

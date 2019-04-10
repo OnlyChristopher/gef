@@ -152,8 +152,8 @@ class ProyectosController extends Controller
 	                  'duracion'                => $duracion,
 	                  'estado_proyecto'         => $estado_proyecto,
 	                  'carpetas'                => $carpetas,
-	                  'usuario_actualizo'      => $usuario_creacion,
-	                  'fecha_actualizo'        => $fecha_creacion
+	                  'usuario_actualizo'       => $usuario_creacion,
+	                  'fecha_actualizo'         => $fecha_creacion
 	    );
 	    //dd($data);
 	    DB::table('proyectos')->where('id_proyecto', $id)->update($data);

@@ -12,6 +12,13 @@ class NotificacionesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    protected $dateformt;
+
+	public function __construct(){
+		$this->dateformt = date('Y-m-d');
+    }
+    
     public function index()
     {
         //
@@ -36,7 +43,26 @@ class NotificacionesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $id_temporal        = $request->input('id_temporal');
+        $id_users           = $request->input('usuario_id');
+        $comentarios        = $request->input('comentarios');
+        $usuario_creacion   = $request->input('id_user');
+
+        foreach ($id_users as $id_user){
+			$data[] = array('id_temporal' => $id_temporal,
+			                'id_user' => $id_user,
+			                'comentarios' => $comentarios,
+			                'usuario_creacion' => $usuario_creacion,
+			                'fecha_creacion' => $this->dateformt);
+		}
+		//dd($data);
+        DB::table('notificaciones')->insert($data);
+
+        DB::table('temporales')->where('id_temporal', $id_temporal)->update(['notificacion' => 1]);
+
+
+		return redirect()->route('temporales.index')
+		                 ->with('success', 'Notificacion Registrada');
     }
 
     /**

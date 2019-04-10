@@ -256,9 +256,7 @@ class CarpetasController extends Controller
 
 	    rename($oldname, $newname);
 
-	    //dd( Storage::disk('local')->allFiles('proyecto/'.$id_proyecto.'/'.$princiaples->nombre.'/'.$secundarias->nombre));
 
-	    //Storage::disk('local')->move('proyecto/'.$id_proyecto.'/'.$princiaples->nombre.'/'.$secundarias->nombre,'');
 
 
 	    return redirect()->route('carpetasProyectos',$id_proyecto)

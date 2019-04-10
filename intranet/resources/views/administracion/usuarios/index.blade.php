@@ -1,12 +1,12 @@
 @extends('layouts.app')
-@section('title', 'Administracion | Usuarios |')
+@section('title', 'Usuarios | Administracion |')
 @section('clase-active-administracion','active')
 @section('clase-block-usuarios','block')
 @section('clase-active-usuarios','active')
 @section('content')
     <!-- begin breadcrumb -->
     <ol class="breadcrumb pull-right">
-        <li class="breadcrumb-item active"><a href="javascript:;">Mantenimiento Usuarios</a></li>
+        <li class="breadcrumb-item active"><a href="{{route('usuarios.index')}}">Mantenimiento Usuarios</a></li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
@@ -23,12 +23,13 @@
             <h4 class="panel-title">Mantenimiento Usuarios</h4>
         </div>
         <div class="panel-body">
-            <div class="container">
+            <div class="table-responsive">
 
 
                 @if ($message = Session::get('success'))
-                    <div class="alert alert-success">
-                        <p>{{$message}}</p>
+                    <div class="alert alert-success fade show" data-auto-dismiss="2000">
+                        <span class="close" data-dismiss="alert">×</span>
+                        <strong>{{$message}}</strong>
                     </div>
                 @endif
 
@@ -55,10 +56,16 @@
                             <td>{{$usuario->nameprofile}}</td>
                             <td>
                                 <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="post">
-                                    <a class="btn btn-sm btn-warning" href="{{route('usuarios.edit',$usuario->id)}}">Edit</a>
+                                    <a class="btn btn-icon btn-circle btn-warning"
+                                       href="{{route('usuarios.edit',$usuario->id)}}" data-toggle="tooltip" data-container="body" data-title="Editar"><i
+                                                class="fa fa-pencil-alt"></i></a>
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+
+                                    <button 
+                                                class="btn btn-icon btn-circle btn-danger" data-toggle="tooltip"
+                                                data-container="body" data-title="Eliminar"><i
+                                                         class="fa fa-trash-alt"></i></button>
                                 </form>
                             </td>
                         </tr>
