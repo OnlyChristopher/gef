@@ -1,12 +1,14 @@
 @component('mail::message')
-# Introduction
+# Notificacion de Documentos Temporales
 
-The body of your message.
-
-@component('mail::button', ['url' => ''])
-Button Text
+@component('mail::panel')
+    {{$e_message}}
 @endcomponent
 
-Thanks,<br>
+@component('mail::button', ['url' => 'https://www.greendfield.com'])
+Ver Intranet
+@endcomponent
+
+Gracias,<br>
 {{ config('app.name') }}
 @endcomponent

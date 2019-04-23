@@ -36,7 +36,8 @@
 	<link href="{{ asset('assets/plugins/jstree/dist/themes/default/style.min.css') }}" rel="stylesheet" />
 	<script src="{{ asset('assets/js/demo/ui-tree.demo.min.js') }}"></script>
 
-
+	<link href="{{asset('assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
+	<link href="{{asset('assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css')}}" rel="stylesheet">
 	<!-- ================== END PAGE LEVEL STYLE ================== -->
 
     <!-- ================== BEGIN BASE JS ================== -->
@@ -65,85 +66,16 @@
 
 			<!-- begin header-nav -->
 			<ul class="navbar-nav navbar-right">
-                <li>
+               {{-- <li>
                         <form class="navbar-form">
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Busqueda">
                                 <button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
                             </div>
                         </form>
-                </li>
-				<li class="dropdown">
-					<a href="#" data-toggle="dropdown" class="dropdown-toggle f-s-14">
-						<i class="fa fa-bell"></i>
-						<span class="label">5</span>
-					</a>
-					<ul class="dropdown-menu media-list dropdown-menu-right">
-						<li class="dropdown-header">NOTIFICATIONS (5)</li>
-						<li class="media">
-							<a href="javascript:;">
-								<div class="media-left">
-									<i class="fa fa-bug media-object bg-silver-darker"></i>
-								</div>
-								<div class="media-body">
-									<h6 class="media-heading">Server Error Reports <i class="fa fa-exclamation-circle text-danger"></i></h6>
-									<div class="text-muted f-s-11">3 minutes ago</div>
-								</div>
-							</a>
-						</li>
-						<li class="media">
-							<a href="javascript:;">
-								<div class="media-left">
-									<img src="{{ asset('assets/img/user/user-1.jpg') }}" class="media-object" alt="" />
-									<i class="fab fa-facebook-messenger text-primary media-object-icon"></i>
-								</div>
-								<div class="media-body">
-									<h6 class="media-heading">John Smith</h6>
-									<p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
-									<div class="text-muted f-s-11">25 minutes ago</div>
-								</div>
-							</a>
-						</li>
-						<li class="media">
-							<a href="javascript:;">
-								<div class="media-left">
-									<img src="{{ asset('assets/img/user/user-2.jpg') }}" class="media-object" alt="" />
-									<i class="fab fa-facebook-messenger text-primary media-object-icon"></i>
-								</div>
-								<div class="media-body">
-									<h6 class="media-heading">Olivia</h6>
-									<p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
-									<div class="text-muted f-s-11">35 minutes ago</div>
-								</div>
-							</a>
-						</li>
-						<li class="media">
-							<a href="javascript:;">
-								<div class="media-left">
-									<i class="fa fa-plus media-object bg-silver-darker"></i>
-								</div>
-								<div class="media-body">
-									<h6 class="media-heading"> New User Registered</h6>
-									<div class="text-muted f-s-11">1 hour ago</div>
-								</div>
-							</a>
-						</li>
-						<li class="media">
-							<a href="javascript:;">
-								<div class="media-left">
-									<i class="fa fa-envelope media-object bg-silver-darker"></i>
-									<i class="fab fa-google text-warning media-object-icon f-s-14"></i>
-								</div>
-								<div class="media-body">
-									<h6 class="media-heading"> New Email From John</h6>
-									<div class="text-muted f-s-11">2 hour ago</div>
-								</div>
-							</a>
-						</li>
-						<li class="dropdown-footer text-center">
-							<a href="javascript:;">View more</a>
-						</li>
-					</ul>
+                </li>--}}
+				<li class="dropdown" id="notificaciones">
+
 				</li>
 				<li class="dropdown navbar-user">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -268,6 +200,9 @@
                                 <li class="@yield('clase-active-usuarios')">
                                     <a href="{{action('UsuariosController@index')}}">{{ __('Mantenimiento de Usuarios') }}</a>
                                 </li>
+								<li class="@yield('clase-active-cargos')">
+									<a href="{{action('CargosController@index')}}">{{ __('Mantenimiento de Cargos') }}</a>
+								</li>
 						</ul>
 					</li>
                     @endif
@@ -294,7 +229,7 @@
         @yield('content')
         </div>
 		<!-- end #content -->
-
+		@csrf
 		<!-- begin #footer -->
 		<div id="footer" class="footer">
 			&copy; 2019 GreEngField - All Rights Reserved
@@ -333,6 +268,10 @@
 <script src="{{ asset('assets/plugins/bootstrap-sweetalert/sweetalert.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/jstree/dist/jstree.min.js') }}"></script>
 
+<script src="{{asset('assets/plugins/DataTables/media/js/jquery.dataTables.js')}}"></script>
+<script src="{{asset('assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{asset('assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js')}}"></script>
+
 	<!-- ================== END PAGE LEVEL JS ================== -->
 <script>
     $(document).ready(function() {
@@ -342,6 +281,37 @@
 			placeholder: "Seleccione Usuarios"
 		});
         console.log("%c Site developed with -   by  @OnlyChristopher " ,"background: #32a932; padding:5px; font-size: 12px; color: #ffffff");
+
+        $('.table').DataTable({
+			"lengthChange" : false,
+			"ordering": false,
+			"info": true,
+			"bProcessing": true,
+			"language": {
+				"sProcessing": "Procesando...",
+				"sLengthMenu": "Mostrar _MENU_ registros",
+				"sZeroRecords": "No se encontraron resultados",
+				"sEmptyTable": "Ningún dato disponible en esta tabla",
+				"sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+				"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+				"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+				"sInfoPostFix": "",
+				"sSearch": "Buscar:",
+				"sUrl": "",
+				"sInfoThousands": ",",
+				"sLoadingRecords": "Cargando...",
+				"oPaginate": {
+					"sFirst": "Primero",
+					"sLast": "Último",
+					"sNext": "Siguiente",
+					"sPrevious": "Anterior"
+				},
+				"oAria": {
+					"sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+					"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+				}
+			}
+		});
 
     });
 	$("#fecha_proc").datepicker({
@@ -446,6 +416,30 @@
 
 	});
 
+	$('[data-click="swal-danger-actividades"]').click(function (e) {
+		swal({
+			title: "Desea eliminar registro?",
+			text: "Recuerde que si elimina el registro, no se puede recuperar",
+			icon: "error",
+			buttons: {
+				cancel: {text: "Cancelar", value: null, visible: !0, className: "btn btn-default", closeModal: !0},
+				confirm: {text: "Eliminar", value: !0, visible: !0, className: "btn btn-danger", closeModal: !0}
+			}
+		}).then((willDelete) => {
+			if (willDelete) {
+				let id = $(this).data('id');
+				//console.log(id);
+				$('#btn-actividades-delete'+'-'+id).click();
+				swal("Registro Eliminado!", {
+					icon: "success",
+				});
+			} else {
+				swal("Cancelo!");
+			}
+		});
+
+	});
+
 	$('[data-click="swal-danger-folders"]').click(function (e) {
 		swal({
 			title: "Desea eliminar registro?",
@@ -470,8 +464,8 @@
 
 	});
 
-	$('[data-click="swal-danger-proyectos"]').click(function (e) {
 
+	$('[data-click="swal-danger-proyectos"]').click(function (e) {
 		swal({
 			title: "Desea eliminar registro?",
 			text: "Recuerde que si elimina el registro, no se puede recuperar",
@@ -482,7 +476,31 @@
 			}
 		}).then((willDelete) => {
 			if (willDelete) {
-				$('#btn-proyectos-delete').click();
+				let id = $(this).data('id');
+				$('#btn-proyectos-delete'+'-'+id).click();
+				swal("Registro Eliminado!", {
+					icon: "success",
+				});
+			} else {
+				swal("Cancelo!");
+			}
+		});
+
+	});
+
+	$('[data-click="swal-danger-cargos"]').click(function (e) {
+		swal({
+			title: "Desea eliminar registro?",
+			text: "Recuerde que si elimina el registro, no se puede recuperar",
+			icon: "error",
+			buttons: {
+				cancel: {text: "Cancelar", value: null, visible: !0, className: "btn btn-default", closeModal: !0},
+				confirm: {text: "Eliminar", value: !0, visible: !0, className: "btn btn-danger", closeModal: !0}
+			}
+		}).then((willDelete) => {
+			if (willDelete) {
+				let id = $(this).data('id');
+				$('#btn-cargos-delete'+'-'+id).click();
 				swal("Registro Eliminado!", {
 					icon: "success",
 				});
@@ -519,6 +537,19 @@
 		});
 	});
 
+	let usuario = "{{Auth::user()->id}}";
+	let token = $("input[name='_token']").val();
+
+	$.ajax({
+		url: "<?php echo route('notificacion-ajax') ?>",
+		method: 'POST',
+		data: {usuario:usuario, _token:token},
+		success: function(data) {
+			$("#notificaciones").html('');
+			$("#notificaciones").html(data.notificaciones);
+		}
+	});
+
 	let edit_folder = function (id) {
 		let url = "{{ route('carpetasProyectosEdit', ':id') }}";
 		url = url.replace(':id', id);
@@ -533,15 +564,16 @@
 	};
 
 	let detail_folder = function(proyecto,id){
-		let url ="{{ route('carpetasProyectosList', ['proyecto' => ':proyecto' , 'id' => ':id'])}}"
+		let url ="{{ route('carpetasProyectosList', ['proyecto' => ':proyecto' , 'id' => ':id'])}}";
 
 		//console.log(url);
 		url = url.replace(':id',id);
 		url = url.replace(':proyecto',proyecto);
 
+		$('#id_archivos').val(url);
 
 		$('#id_carpetaprincipal').val(url);
-	}
+	};
 
 	$('.edit-folder').on('click',function () {
 		let url = $('#id_carpetasecundaria').val();

@@ -34,16 +34,19 @@
                 @endif
 
                 <table class="table table-striped m-b-0">
-                    <tr>
-                        <th><b>No.</b></th>
-                        <th>Nombres</th>
-                        <th>Apellidos</th>
-                        <th>Correo</th>
-                        <th>DNI</th>
-                        <th>Cargo</th>
-                        <th>Accesos</th>
-                        <th width = "180px">Action</th>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th><b>No.</b></th>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Correo</th>
+                            <th>DNI</th>
+                            <th>Cargo</th>
+                            <th>Accesos</th>
+                            <th width = "180px">Action</th>
+                        </tr>
+                    </thead>
+
 
                     @foreach ($users as $usuario)
                         <tr>
@@ -72,8 +75,8 @@
                     @endforeach
                 </table>
 
-                {!! $users->links() !!}
-            </div>        </div>
+            </div>
+        </div>
     </div>
     <!-- end panel -->
 

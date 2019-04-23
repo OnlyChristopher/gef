@@ -25,7 +25,6 @@
             <h4 class="panel-title">Miscelaneos de {{$areas->nombre_area}}</h4>
         </div>
         <div class="panel-body">
-            <div class="container">
                 @if ($message = Session::get('success'))
                 <div class="alert alert-success fade show" data-auto-dismiss="2000">
                     <span class="close" data-dismiss="alert">×</span>
@@ -35,6 +34,7 @@
                 <div class="table-responsive">
                     @if(count($miscelaneos))
                         <table class="table table-hover table-sm m-b-10">
+                            <thead>
                             <tr>
                                 <th><b>No.</b></th>
                                 <th>Codigo</th>
@@ -46,6 +46,7 @@
                                 <th>Archivo</th>
                                 <th width="90px">Acciones</th>
                             </tr>
+                            </thead>
                             @php
                                 $i=1;
                             @endphp
@@ -59,16 +60,16 @@
                                     <td>{{$miscelaneo->fecha_proc}}</td>
                                     <td>
                                         @if ($miscelaneo->estado_documento == "0")
-                                            Vigente
+                                            <span class="label label-green">Vigente</span>
                                         @else
-                                            Caducado
+                                            <span class="label label-danger">Caducado</span>
                                         @endif
                                     </td>
                                     <td>
                                         @if($miscelaneo->archivo_documento)
                                             <a href="{{route('downloadfileMiscelaneos', $miscelaneo->id)}}"
                                                title=""
-                                               class="btn btn-info btn-icon btn-circle" data-toggle="tooltip" data-container="body" data-title="{{$miscelaneo->archivo_documento}}">
+                                               class="btn btn-info btn-icon btn-circle" data-toggle="tooltip" data-container="body" data-title="Descargar">
                                                 <i class="fa fa-file-alt"></i>
                                             </a>
                                         @endif
@@ -97,7 +98,6 @@
                                 </tr>
                             @endforeach
                         </table>
-                        {!! $miscelaneos->links('pagination::bootstrap-4') !!}
                     @else
                         <div class="alert alert-info fade show" data-auto-dismiss="2000">
                             <span class="close" data-dismiss="alert">×</span>
@@ -105,8 +105,6 @@
                         </div>
                     @endif
                 </div>
-
-            </div>
         </div>
     </div>
     <!-- end panel -->

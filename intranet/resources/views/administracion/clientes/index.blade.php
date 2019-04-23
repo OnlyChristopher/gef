@@ -23,51 +23,51 @@
             <h4 class="panel-title">Mantenimiento Clientes</h4>
         </div>
         <div class="panel-body">
-            <div class="container">
-
-
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success fade show" data-auto-dismiss="2000">
                         <span class="close" data-dismiss="alert">×</span>
                         <strong>{{$message}}</strong>
                     </div>
                 @endif
-
-                <table class="table table-striped m-b-0">
-                    <tr>
-                        <th><b>No.</b></th>
-                        <th>Cliente</th>
-                        <th>RUC</th>
-                        <th>Direccion</th>
-                        <th width = "180px">Opciones</th>
-                    </tr>
-
-                    @foreach ($clientes as $cliente)
+                <div class="table-responsive">
+                    <table class="table table-striped m-b-0">
+                        <thead>
                         <tr>
-                            <td><b>{{$cliente->id_cliente}}.</b></td>
-                            <td>{{$cliente->nombre_cliente}}</td>
-                            <td>{{$cliente->ruc_cliente}}</td>
-                            <td>{{$cliente->direccion_cliente}}</td>
-                            <td>
-                                <form action="{{ route('clientes.destroy', $cliente->id_cliente) }}" method="post">
-                                    <a class="btn btn-icon btn-circle btn-warning"
-                                       href="{{route('clientes.edit',$cliente->id_cliente)}}"
-                                       data-toggle="tooltip" data-container="body" data-id-="{{$cliente->id_cliente}}" data-title="Editar"><i
-                                                class="fa fa-pencil-alt"></i></a>
-                                    @csrf
-                                    @method('DELETE')
-                                    <button id="btn-proyectos-delete"  type="submit"
-                                            class="btn btn-icon btn-circle btn-danger" data-toggle="tooltip" data-container="body" data-id-="{{$cliente->id_cliente}}" data-title="Eliminar"><i
-                                                class="fa fa-trash-alt"></i>
-                                    </button>
-                                </form>
-                            </td>
+                            <th><b>No.</b></th>
+                            <th>Cliente</th>
+                            <th>RUC</th>
+                            <th>Direccion</th>
+                            <th width = "180px">Opciones</th>
                         </tr>
-                    @endforeach
-                </table>
+                        </thead>
 
-                {!! $clientes->links() !!}
-            </div>
+
+                        @foreach ($clientes as $cliente)
+                            <tr>
+                                <td><b>{{$cliente->id_cliente}}.</b></td>
+                                <td>{{$cliente->nombre_cliente}}</td>
+                                <td>{{$cliente->ruc_cliente}}</td>
+                                <td>{{$cliente->direccion_cliente}}</td>
+                                <td>
+                                    <form action="{{ route('clientes.destroy', $cliente->id_cliente) }}" method="post">
+                                        <a class="btn btn-icon btn-circle btn-warning"
+                                           href="{{route('clientes.edit',$cliente->id_cliente)}}"
+                                           data-toggle="tooltip" data-container="body" data-id-="{{$cliente->id_cliente}}" data-title="Editar"><i
+                                                    class="fa fa-pencil-alt"></i></a>
+                                        @csrf
+                                        @method('DELETE')
+                                        <button id="btn-proyectos-delete"  type="submit"
+                                                class="btn btn-icon btn-circle btn-danger" data-toggle="tooltip" data-container="body" data-id-="{{$cliente->id_cliente}}" data-title="Eliminar"><i
+                                                    class="fa fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </table>
+
+                </div>
+
         </div>
     </div>
     <!-- end panel -->

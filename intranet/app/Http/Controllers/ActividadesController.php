@@ -27,7 +27,7 @@ class ActividadesController extends Controller
                         ->join('proyectos','proyectos.id_proyecto', '=', 'actividades.id_proyecto')
                         ->select('actividades.*','proyectos.nombre_proyecto')
                         ->orderBy('actividades.id_actividades')
-                        ->paginate(10);
+                        ->get();
         return view('proyectos.actividades.index', ['actividades' => $actividades]);
 
     }
@@ -41,8 +41,8 @@ class ActividadesController extends Controller
     public function create()
     {
         $proyectos  =   DB::table('proyectos')->get();
-		$estados    =   DB::table('estados')->get();
-    	return view('proyectos.actividades.create', ['proyectos' => $proyectos, 'estados' => $estados]);
+		//$estados    =   DB::table('estados')->get();
+    	return view('proyectos.actividades.create', ['proyectos' => $proyectos]);
     }
 
     /**
@@ -53,23 +53,26 @@ class ActividadesController extends Controller
      */
     public function store(Request $request)
     {
-        $id_proyecto        = $request->input('id_proyecto');
-	    $nombre_actividades = $request->input('nombre_actividades');
-	    $cod_proyecto       = $request->input('cod_proyecto');
-	    $requisicion        = $request->input('requisicion');
-	    $osc                = $request->input('osc');
-	    $bases              = $request->input('bases');
-	    $comprador          = $request->input('comprador');
-	    $costo_presupuestado = $request->input('costo_presupuestado');
-	    $id_estado          = $request->input('id_estado');
-	    $adjudicado         = $request->input('adjudicado');
-	    $tiempo_ejecucion   = $request->input('tiempo_ejecucion');
-	    $fr043              = $request->input('fr043');
-	    $movilizado         = $request->input('movilizado');
-	    $operador           = $request->input('operador');
-	    $visita_terreno     = $request->input('visita_terreno');
-	    $comentarios        = $request->input('comentarios');
-	    $usuario_creacion   = $request->input('id_user');
+        $id_proyecto            = $request->input('id_proyecto');
+	    $nombre_actividades     = $request->input('nombre_actividades');
+	    $cod_proyecto           = $request->input('cod_proyecto');
+	    $requisicion            = $request->input('requisicion');
+	    $osc                    = $request->input('osc');
+	    $bases                  = $request->input('bases');
+	    $comprador              = $request->input('comprador');
+	    $costo_presupuestado    = $request->input('costo_presupuestado');
+	    $estatus                = $request->input('estatus');
+	    $adjudicado             = $request->input('adjudicado');
+	    $tiempo_ejecucion       = $request->input('tiempo_ejecucion');
+	    $fr043                  = $request->input('fr043');
+	    $movilizado             = $request->input('movilizado');
+	    $operador               = $request->input('operador');
+	    $visita_terreno         = $request->input('visita_terreno');
+	    $fecha_estimada         = $request->input('fecha_estimada');
+	    $fase                   = $request->input('fase');
+	    $avance                 = $request->input('avance');
+	    $comentarios            = $request->input('comentarios');
+	    $usuario_creacion       = $request->input('id_user');
 	    $fecha_creacion = $this->dateformt;
 
 	    $data = array('id_proyecto' => $id_proyecto,
@@ -80,13 +83,16 @@ class ActividadesController extends Controller
 		                'bases' => $bases,
 		                'comprador' => $comprador,
 		                'costo_presupuestado' => $costo_presupuestado,
-		                'id_estado' => $id_estado,
+		                'estatus' => $estatus,
 		                'adjudicado' => $adjudicado,
 		                'tiempo_ejecucion' => $tiempo_ejecucion,
 		                'fr043' => $fr043,
 		                'movilizado' => $movilizado,
 		                'operador' => $operador,
 		                'visita_terreno' => $visita_terreno,
+		                'fecha_estimada' => $fecha_estimada,
+		                'fase' => $fase,
+		                'avance' => $avance,
 		                'comentarios' => $comentarios,
 		                'usuario_creacion' => $usuario_creacion,
 		                'fecha_creacion' => $fecha_creacion
@@ -121,8 +127,7 @@ class ActividadesController extends Controller
                          ->where('id_actividades',$id)
                          ->first();
 	    $proyectos  =   DB::table('proyectos')->get();
-	    $estados    =   DB::table('estados')->get();
-        return view('proyectos.actividades.edit', ['actividades' => $actividades, 'proyectos' => $proyectos, 'estados' => $estados]);
+        return view('proyectos.actividades.edit', ['actividades' => $actividades, 'proyectos' => $proyectos]);
 
     }
 
@@ -135,44 +140,51 @@ class ActividadesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $id_proyecto        = $request->input('id_proyecto');
-	    $nombre_actividades = $request->input('nombre_actividades');
-	    $cod_proyecto       = $request->input('cod_proyecto');
-	    $requisicion        = $request->input('requisicion');
-	    $osc                = $request->input('osc');
-	    $bases              = $request->input('bases');
-	    $comprador          = $request->input('comprador');
-	    $costo_presupuestado = $request->input('costo_presupuestado');
-	    $id_estado          = $request->input('id_estado');
-	    $adjudicado         = $request->input('adjudicado');
-	    $tiempo_ejecucion   = $request->input('tiempo_ejecucion');
-	    $fr043              = $request->input('fr043');
-	    $movilizado         = $request->input('movilizado');
-	    $operador           = $request->input('operador');
-	    $visita_terreno     = $request->input('visita_terreno');
-	    $comentarios        = $request->input('comentarios');
-	    $usuario_creacion   = $request->input('id_user');
-	    $fecha_creacion     = $this->dateformt;
+         $id_proyecto            = $request->input('id_proyecto');
+	     $nombre_actividades     = $request->input('nombre_actividades');
+	     $cod_proyecto           = $request->input('cod_proyecto');
+	     $requisicion            = $request->input('requisicion');
+	     $osc                    = $request->input('osc');
+	     $bases                  = $request->input('bases');
+	     $comprador              = $request->input('comprador');
+	     $costo_presupuestado    = $request->input('costo_presupuestado');
+	     $estatus                = $request->input('estatus');
+	     $adjudicado             = $request->input('adjudicado');
+	     $tiempo_ejecucion       = $request->input('tiempo_ejecucion');
+	     $fr043                  = $request->input('fr043');
+	     $movilizado             = $request->input('movilizado');
+	     $operador               = $request->input('operador');
+	     $visita_terreno         = $request->input('visita_terreno');
+	     $fecha_estimada         = $request->input('fecha_estimada');
+	     $fase                   = $request->input('fase');
+	     $avance                 = $request->input('avance');
+         $comentarios            = $request->input('comentarios');
+	     $usuario_creacion       = $request->input('id_user');
+		 $fecha_creacion         = $this->dateformt;
 
-	    $data = array('id_proyecto'             => $id_proyecto,
-		                'nombre_actividades'    => $nombre_actividades,
-		                'cod_proyecto'          => $cod_proyecto,
-		                'requisicion'           => $requisicion,
-		                'osc'                   => $osc,
-		                'bases'                 => $bases,
-		                'comprador'             => $comprador,
-		                'costo_presupuestado'   => $costo_presupuestado,
-		                'id_estado'             => $id_estado,
-		                'adjudicado'            => $adjudicado,
-		                'tiempo_ejecucion'      => $tiempo_ejecucion,
-		                'fr043'                 => $fr043,
-		                'movilizado'            => $movilizado,
-		                'operador'              => $operador,
-		                'visita_terreno'        => $visita_terreno,
-		                'comentarios'           => $comentarios,
-		                'usuario_creacion'      => $usuario_creacion,
-		                'fecha_creacion'        => $fecha_creacion
-		                );
+
+         $data = array('id_proyecto' => $id_proyecto,
+	                  'nombre_actividades' => $nombre_actividades,
+	                  'cod_proyecto' => $cod_proyecto,
+	                  'requisicion' => $requisicion,
+	                  'osc' => $osc,
+	                  'bases' => $bases,
+	                  'comprador' => $comprador,
+	                  'costo_presupuestado' => $costo_presupuestado,
+	                  'estatus' => $estatus,
+	                  'adjudicado' => $adjudicado,
+	                  'tiempo_ejecucion' => $tiempo_ejecucion,
+	                  'fr043' => $fr043,
+	                  'movilizado' => $movilizado,
+	                  'operador' => $operador,
+	                  'visita_terreno' => $visita_terreno,
+	                  'fecha_estimada' => $fecha_estimada,
+	                  'fase' => $fase,
+	                  'avance' => $avance,
+	                  'comentarios' => $comentarios,
+	                  'usuario_creacion' => $usuario_creacion,
+	                  'fecha_creacion' => $fecha_creacion
+	     );
 
 	    DB::table('actividades')->where('id_actividades',$id)->update($data);
 	    return redirect()->route('actividades.index')

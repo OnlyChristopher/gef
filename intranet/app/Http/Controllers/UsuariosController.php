@@ -26,7 +26,7 @@ class UsuariosController extends Controller
 		           ->join('positions','positions.id','=','users.position')
 		           ->select('users.*','profiles.nameprofile','positions.nombre')
 		           ->orderBy('users.id')
-		           ->paginate(15);
+		           ->get();
 
 	    return view('administracion.usuarios.index', ['users' => $users]);
     }

@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Session;
 use DB;
-use Illuminate\Support\Facades\Storage;
-class MiscelaneosController extends Controller
+use Illuminate\Support\Carbon;
+
+class   MiscelaneosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,7 +26,7 @@ class MiscelaneosController extends Controller
                          ->join('areas','areas.id_area', '=', 'miscelaneos.id_area')
 	                     ->select('miscelaneos.*', 'areas.nombre_area')
 						 ->where('miscelaneos.id_area','=',$id)
-						 ->paginate(6);
+						 ->get();
 
         $areas = DB::table('areas')
 	               ->where('id_area','=',$id)
@@ -68,6 +69,13 @@ class MiscelaneosController extends Controller
 	    $request->archivo_documento->storeAs($id_areas.'/archivo_documento/'.$codigo, $archivo_documento);
 
 	    //Storage::putFile('app/'.$id_areas.'/archivo_documento/'.$codigo,$request->file('archivo_documento'));
+	    $DeferenceInDays = Carbon::parse(Carbon::now())->diffInDays($fecha_proc);
+
+	    if($DeferenceInDays > 364){
+		    $estado = 1;
+	    }else{
+		    $estado = 0;
+	    }
 
 	    $data = array('codigo' => $codigo,
 	                  'id_area' => $id_areas,
@@ -77,7 +85,7 @@ class MiscelaneosController extends Controller
 	                  'usuario_creacion' => $id_users,
 	                  'fecha_creacion' => $this->dateformt,
 	                  'archivo_documento' => $archivo_documento,
-	                  'estado_documento' => 0);
+	                  'estado_documento' => $estado);
 
 	    //dd($data);
 	    DB::table('miscelaneos')->insert($data);
@@ -134,6 +142,13 @@ class MiscelaneosController extends Controller
 		    $archivo_documento = $request->input('archivo_documento');
 	    }
 
+	    $DeferenceInDays = Carbon::parse(Carbon::now())->diffInDays($fecha_proc);
+
+	    if($DeferenceInDays > 364){
+		    $estado = 1;
+	    }else{
+		    $estado = 0;
+	    }
 
 	    $data = array('codigo' => $codigo,
 	                  'id_area' => $id_areas,
@@ -142,7 +157,8 @@ class MiscelaneosController extends Controller
 	                  'fecha_proc' => $fecha_proc,
 	                  'usuario_actualizo' => $id_users,
 	                  'fecha_actualizo' =>  $this->dateformt,
-	                  'archivo_documento' => $archivo_documento);
+	                  'archivo_documento' => $archivo_documento,
+		              'estado_documento' => $estado);
 
 	    DB::table('miscelaneos')->where('id', $id)->update($data);
 	    return redirect()->route('miscelaneosAreas', $id_areas)
@@ -167,4 +183,6 @@ class MiscelaneosController extends Controller
 		$dl = DB::table('miscelaneos')->where('id', $id)->first();
 		return response()->download("../intranet/storage/app/$dl->id_area/archivo_documento/$dl->codigo/$dl->archivo_documento");
 	}
+
+
 }

@@ -16,9 +16,12 @@ class Notificacion extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public $asunto;
+    public $mensaje;
+    public function __construct($asunto, $mensaje)
     {
-        //
+        $this->sub = $asunto;
+        $this->mes = $mensaje;
     }
 
     /**
@@ -28,6 +31,9 @@ class Notificacion extends Mailable
      */
     public function build()
     {
-        return $this->markdown('email.notificacion');
+        $e_subject = $this->sub;
+        $e_message = $this->mes;
+
+    	return $this->markdown('email.notificacion', compact("e_message"))->subject($e_subject);
     }
 }

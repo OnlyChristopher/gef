@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class TemporalesController extends Controller
 {
@@ -27,8 +28,22 @@ class TemporalesController extends Controller
 	                    ->join('documentos', 'documentos.id_doc', '=', 'temporales.tipo_doc')
 	                    ->join('proyectos', 'proyectos.id_proyecto', '=', 'temporales.id_proyecto')
                         ->select('temporales.*','c.firstname','c.lastname' , 'r.firstname as nombre','r.lastname as apellido','documentos.tipo_doc', 'proyectos.nombre_proyecto')
-	                    ->paginate(10);
+	                    ->get();
 
+		$temps = DB::table('temporales')->get();
+
+		foreach ($temps as $temp){
+			$documentos = DB::table('documentos')->where('id_doc', $temp->tipo_doc)->first();
+				$DeferenceInDays = Carbon::parse(Carbon::now())->diffInDays($temp->fecha_carga);
+				if( $DeferenceInDays > $documentos->vigencia_doc){
+					DB::table('temporales')->where('id_temporal', $temp->id_temporal)->update(['estado' => 'CADUCADO']);
+				 }
+
+				if( $DeferenceInDays > 0 && $DeferenceInDays < $documentos->vigencia_doc){
+					DB::table('temporales')->where('id_temporal', $temp->id_temporal)->update(['estado' => 'PENDIENTE']);
+				}
+
+		}
 
         return view('proyectos.temporales.index', ['temporales' => $temporales]);
     }
@@ -63,7 +78,7 @@ class TemporalesController extends Controller
     {
     	$usuario_carga      = $request->input('id_user');
     	$tipo_doc           = $request->input('tipo_doc');
-        $id_proyecto           = $request->input('id_proyecto');
+        $id_proyecto        = $request->input('id_proyecto');
 	    $usuario_revision   = $request->input('usuario_revision');
         $comentarios        = $request->input('comentarios');
         $fecha              = $request->input('fecha');
@@ -133,7 +148,7 @@ class TemporalesController extends Controller
 	public function file($id)
 	{
 		$dl = DB::table('temporales')->where('id_temporal', $id)->first();
-		return response()->download("../intranet/storage/app/temporales/$dl->id_cliente/$dl->documento");
+		return response()->download("../intranet/storage/app/temporales/$dl->usuario_carga/$dl->documento");
 	}
     /**
      * Update the specified resource in storage.
@@ -144,7 +159,32 @@ class TemporalesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+	    $usuario_carga      = $request->input('id_user');
+	    $tipo_doc           = $request->input('tipo_doc');
+	    $id_proyecto        = $request->input('id_proyecto');
+	    $usuario_revision   = $request->input('usuario_revision');
+	    $comentarios        = $request->input('comentarios');
+	    $documento          = $request->documento->getClientOriginalName();
+	    $id_user            = $request->input('id_user');
+	    $fecha_actualizo    = $this->dateformt;
+
+	    $request->documento->storeAs('temporales/'.$usuario_carga,$documento);
+
+	    $data =     array(  'usuario_carga'     => $usuario_carga,
+	                        'id_proyecto'       => $id_proyecto,
+	                        'tipo_doc'          => $tipo_doc,
+	                        'nombre_archivo'    => $documento,
+	                        'comentarios'       => $comentarios,
+	                        'documento'         => $documento,
+	                        'usuario_revision'  => $usuario_revision,
+	                        'usuario_actualizo' => $id_user,
+	                        'fecha_actualizo'   => $fecha_actualizo);
+
+	    DB::table('temporales')->where('id_temporal',$id)->update($data);
+
+	    return redirect()->route('temporales.index')
+	                     ->with('success', 'Registro Modificado');
+
     }
 
     /**

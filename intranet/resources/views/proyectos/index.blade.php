@@ -25,10 +25,9 @@
                 @endif
             </div>
             <h4 class="panel-title">Proyectos</h4>
+            
         </div>
         <div class="panel-body">
-            <div class="container">
-
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success fade show" data-auto-dismiss="2000">
                         <span class="close" data-dismiss="alert">×</span>
@@ -38,6 +37,7 @@
                     <div class="table-responsive">
                         @if(count($proyectos))
                             <table class="table table-hover m-b-10">
+                                <thead>
                                 <tr>
                                     <th><b>No.</b></th>
                                     <th>Codigo</th>
@@ -47,6 +47,8 @@
                                     <th>Estado</th>
                                     <th width="140x">Acciones</th>
                                 </tr>
+                                </thead>
+
 
                                 @foreach ($proyectos as $proyecto)
                                     <tr>
@@ -57,9 +59,9 @@
                                         <td>{{$proyecto->duracion}}</td>
                                         <td>
                                             @if ($proyecto->estado_proyecto == 0)
-                                                Vigente
+                                                <span class="label label-green">Vigente</span>
                                             @else
-                                                Caducado
+                                                <span class="label label-danger">Caducado</span>
                                             @endif
                                         </td>
                                         <td>
@@ -73,11 +75,11 @@
                                                                 class="fa fa-pencil-alt"></i></a>
                                                     @csrf
                                                     @method('DELETE')
-                                                 {{--   <a href="javascript:;" data-click="swal-danger-proyectos"
+                                                    <a href="javascript:;" data-click="swal-danger-proyectos" data-id="{{$proyecto->id_proyecto}}"
                                                        class="btn btn-icon btn-circle btn-danger" data-toggle="tooltip"
                                                        data-container="body" data-title="Eliminar"><i
-                                                                class="fa fa-trash-alt"></i></a>--}}
-                                                    <button id="btn-proyectos-delete"  type="submit"
+                                                                class="fa fa-trash-alt"></i></a>
+                                                    <button id="btn-proyectos-delete-{{$proyecto->id_proyecto}}"  style="display: none" type="submit"
                                                             class="btn btn-icon btn-circle btn-danger"><i
                                                                 class="fa fa-trash-alt"></i>
                                                     </button>
@@ -87,7 +89,6 @@
                                     </tr>
                                 @endforeach
                             </table>
-                            {!! $proyectos->links('pagination::bootstrap-4') !!}
                         @else
                             <div class="alert alert-info fade show" data-auto-dismiss="2000">
                                 <span class="close" data-dismiss="alert">×</span>
@@ -95,7 +96,6 @@
                             </div>
                         @endif
                     </div>
-            </div>
         </div>
     </div>
     <!-- end panel -->

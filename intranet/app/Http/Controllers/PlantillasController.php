@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Session;
 use DB;
+use Illuminate\Support\Carbon;
 
 class PlantillasController extends Controller
 {
@@ -24,7 +25,7 @@ class PlantillasController extends Controller
 	                    ->join('areas','areas.id_area','=','plantillas.id_area')
 	                    ->select('plantillas.*', 'areas.nombre_area')
 		                ->where('plantillas.id_area','=',$id)
-	                    ->paginate(6);
+	                    ->get();
 
     	$areas = DB::table('areas')
 		             ->where('id_area','=',$id)
@@ -68,7 +69,15 @@ class PlantillasController extends Controller
 
 	    $request->archivo_plantilla->storeAs($id_areas.'/archivo_plantilla/'.$codigo, $archivo_plantilla);
 
-		$data = array('codigo' => $codigo,
+	    $DeferenceInDays = Carbon::parse(Carbon::now())->diffInDays($fecha_proc);
+
+	    if($DeferenceInDays > 364){
+	    	$estado = 1;
+	    }else{
+	    	$estado = 0;
+	    }
+
+	    $data = array('codigo' => $codigo,
 		              'id_area' => $id_areas,
 		              'nombre_plantilla' => $nombre_plantiLla,
 		              'version' => $version,
@@ -76,7 +85,7 @@ class PlantillasController extends Controller
 		              'usuario_creacion' => $id_users,
 		              'fecha_creacion' => $this->dateformt,
 		              'archivo_plantilla' => $archivo_plantilla,
-	                  'estado_plantilla' => 0);
+	                  'estado_plantilla' => $estado);
 
 	    DB::table('plantillas')->insert($data);
 
@@ -139,6 +148,14 @@ class PlantillasController extends Controller
         }else{
             $archivo_plantilla = $request->input('archivo_plantilla');
         }
+
+	    $DeferenceInDays = Carbon::parse(Carbon::now())->diffInDays($fecha_proc);
+
+	    if($DeferenceInDays > 364){
+		    $estado = 1;
+	    }else{
+		    $estado = 0;
+	    }
 		
 
 		$data = array('codigo' => $codigo,
@@ -148,7 +165,8 @@ class PlantillasController extends Controller
 		              'fecha_proc' => $fecha_proc,
 		              'usuario_actualizo' => $id_users,
 		              'fecha_actualizo' =>  $this->dateformt,
-		              'archivo_plantilla' => $archivo_plantilla);
+		              'archivo_plantilla' => $archivo_plantilla,
+					  'estado_plantilla' => $estado);
 		              
         DB::table('plantillas')->where('id', $id)->update($data);
         return redirect()->route('plantillasAreas',$id_areas)

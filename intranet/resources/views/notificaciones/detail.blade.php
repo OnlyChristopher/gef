@@ -6,8 +6,8 @@
 @section('content')
     <!-- begin breadcrumb -->
     <ol class="breadcrumb pull-right">
-    <li class="breadcrumb-item"><a href="{{route('temporales.index')}}">Temporales</a></li>
-    <li class="breadcrumb-item active">Notificaciones</li>
+        <li class="breadcrumb-item"><a href="{{route('temporales.index')}}">Temporales</a></li>
+        <li class="breadcrumb-item active">Notificaciones</li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
@@ -17,7 +17,7 @@
     <!-- begin panel -->
     <div class="panel panel-inverse">
         <div class="panel-heading">
-            <h4 class="panel-title">Crear Notificaciones</h4>
+            <h4 class="panel-title">Ver Notificaciones</h4>
         </div>
         <div class="panel-body">
             <div class="container">
@@ -39,16 +39,16 @@
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="cliente">De:</label>
                             <div class="col-md-6">
-                                <input readonly type="text" class="form-control" name="usuario_carga" id="usuario_carga" value="{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}">
+                                <input readonly type="text" class="form-control" name="usuario_carga" id="usuario_carga" value="{{ $usuario_carga->firstname}} {{ $usuario_carga->lastname}}">
 
                             </div>
                         </div>
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="cliente">Para:</label>
                             <div class="col-md-6">
-                                    <select  name="usuario_id[]" id="usuario_id" class="multiple-select2 form-control" {{--data-live-search="true"--}} multiple="multiple" {{--data-style="btn-white" --}}data-parsley-required="true" data-parsley-required-message="Por favor Seleccione Area">
-                                    @foreach ($usuarios as $usuario)
-                                    <option value="{{$usuario->id}}" >{{$usuario->firstname}} {{$usuario->lastname}} ({{$usuario->email}})</option>
+                                <select disabled name="usuario_id[]" id="usuario_id" class="multiple-select2 form-control" {{--data-live-search="true"--}} multiple="multiple" {{--data-style="btn-white" --}}data-parsley-required="true" data-parsley-required-message="Por favor Seleccione Area">
+                                    @foreach ($responsables as $responsable)
+                                        <option value="{{$responsable->id}}" selected>{{$responsable->firstname}} {{$responsable->lastname}} ({{$responsable->email}})</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -57,12 +57,11 @@
                         <div class="form-group row m-b-10">
                             <label class="col-md-3 text-md-right col-form-label" for="version">Comentarios</label>
                             <div class="col-md-6">
-                                <textarea name="comentarios" id="comentarios" placeholder="Comentarios" class="form-control" rows="3" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Comentario" >{{$temporales->comentarios}}</textarea>
+                                <textarea readonly name="comentarios" id="comentarios" placeholder="Comentarios" class="form-control" rows="3" data-parsley-required="true" data-parsley-required-message="Por favor Ingresa Comentario" >{{$notificaciones->comentarios}}</textarea>
                             </div>
                         </div>
 
                         <input type="hidden" name="id_user" id="id_user" value="{{ Auth::user()->id }}">
-                        <input type="hidden" id="id_temporal" name="id_temporal" value={{$temporales->id_temporal}}>
 
 
                         <div class="form-group row m-b-10">

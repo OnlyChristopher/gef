@@ -176,7 +176,6 @@ class CarpetasController extends Controller
 
 	    return redirect()->route('carpetasProyectos', $id_proyecto)
 	                     ->with('success','Registro Exitoso');
-        //dd($request);
     }
 
     /**
@@ -193,16 +192,43 @@ class CarpetasController extends Controller
         return view('proyectos.carpetas.detail',['files' => $files]);
     }
 
-    public function listfolder($proyecto,$id)
+	/**
+	 * @param $proyecto
+	 * @param $id
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function listfolder($proyecto,$id)
     {
-        $folders = DB::table('carpetas_secundarias')
-                    ->where('id_proyecto',$proyecto)
-	                ->where('id_carpetaprincipal','=', $id)
-	                ->paginate(6);
-        return view('proyectos.carpetas.folders',['folders' => $folders]);
-    }
-    
+    	try{
+		    $folders = DB::table('carpetas_secundarias')
+		                 ->where('id_proyecto',$proyecto)
+		                 ->where('id_carpetaprincipal','=', $id)
+		                 ->paginate(6);
 
+		    $files = DB::table('archivos_carpetas')
+					    ->where('id_proyecto',$proyecto)
+					    ->where('id_carpetaprincipal','=', $id)
+			            ->paginate(6);
+
+		    if (count($folders) > 0){
+			    return view('proyectos.carpetas.folders',['folders' => $folders]);
+		    }else if(count($files)) {
+			    return view('proyectos.carpetas.detail',['files' => $files]);
+		    }else {
+			    return back()->with('success','No hay Sub Carpetas');
+
+		    }
+
+
+
+	    } catch (\Exception $e) {
+		    //return back()->withErrors('success',$e->getMessage())->withInput();
+		    return back()->with('success',$e->getMessage());
+
+	    }
+
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -305,7 +331,13 @@ class CarpetasController extends Controller
         }
     }
 
-    public function carpetasSecundarias(Request $request)
+	/**
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Http\JsonResponse
+	 * @throws \Throwable
+	 */
+	public function carpetasSecundarias(Request $request)
     {
 	   if($request->ajax()){
 		    $carpetasSecundarias = DB::table('carpetas_secundarias')
@@ -316,6 +348,7 @@ class CarpetasController extends Controller
 		    return response()->json(['options'=>$data]);
 	    }
     }
+
 	public function file($id)
 	{
 		$proyectos = DB::table('proyectos')
@@ -325,6 +358,7 @@ class CarpetasController extends Controller
 		               ->get();
 		return view('proyectos.carpetas.file', ['proyectos' => $proyectos, 'carpetas' => $carpetas]);
 	}
+
 	public function filestore(Request $request)
 	{
 		$id_carpetaprincipal    = $request->input('id_carpetaprincipal');
@@ -369,6 +403,7 @@ class CarpetasController extends Controller
 		return redirect()->route('carpetasProyectos',$id_proyecto)
 		                 ->with('success', 'Registro Exitoso');
 	}
+
 	public function downloadFile($id)
 	{
 		$dl = DB::table('archivos_carpetas')

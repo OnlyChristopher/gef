@@ -24,7 +24,7 @@ class ProyectosController extends Controller
     {
         $proyectos =    DB::table('proyectos')
 	                    ->orderBy('id_proyecto','desc')
-                        ->paginate(10);
+                        ->get();
         return view('proyectos.index', ['proyectos' => $proyectos]);
 
     }

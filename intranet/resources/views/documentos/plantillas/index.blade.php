@@ -23,7 +23,6 @@
             <h4 class="panel-title">Plantillas de {{$areas->nombre_area}}</h4>
         </div>
         <div class="panel-body">
-            <div class="container">
                 @if ($message = Session::get('success'))
                 <div class="alert alert-success fade show" data-auto-dismiss="2000">
                     <span class="close" data-dismiss="alert">×</span>
@@ -33,6 +32,7 @@
                 <div class="table-responsive">
                     @if(count($plantillas))
                     <table class="table table-hover table-sm m-b-10">
+                        <thead>
                         <tr>
                             <th><b>No.</b></th>
                             <th>Codigo</th>
@@ -44,6 +44,8 @@
                             <th>Archivo</th>
                             <th width="90px">Acciones</th>
                         </tr>
+                        </thead>
+
                         @php
                             $i=1;
                         @endphp
@@ -57,16 +59,16 @@
                                 <td>{{$plantilla->fecha_proc}}</td>
                                 <td>
                                     @if ($plantilla->estado_plantilla == 0)
-                                        Vigente
+                                        <span class="label label-green">Vigente</span>
                                     @else
-                                        Caducado
+                                        <span class="label label-danger">Caducado</span>
                                     @endif
                                 </td>
                                 <td>
                                     @if($plantilla->archivo_plantilla)
                                         <a href="{{ route('downloadfilePlantillas', $plantilla->id)}}"
                                            title=""
-                                           class="btn btn-success btn-icon btn-circle" data-toggle="tooltip" data-container="body" data-title="{{$plantilla->archivo_plantilla}}">
+                                           class="btn btn-success btn-icon btn-circle" data-toggle="tooltip" data-container="body" data-title="Descargas">
                                             <i class="fa fa-file-excel"></i>
                                         </a>
                                     @endif
@@ -95,7 +97,6 @@
                             </tr>
                         @endforeach
                     </table>
-                    {!! $plantillas->links('pagination::bootstrap-4') !!}
                     @else
                         <div class="alert alert-info fade show" data-auto-dismiss="2000">
                             <span class="close" data-dismiss="alert">×</span>
@@ -104,7 +105,6 @@
                     @endif
                 </div>
 
-            </div>
         </div>
     </div>
     <!-- end panel -->

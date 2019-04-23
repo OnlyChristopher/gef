@@ -35,6 +35,7 @@
                 @endif
                     @if(count($actividades))
                         <table class="table table-hover m-b-10">
+                            <thead>
                             <tr>
                                 <th><b>No.</b></th>
                                 <th>Proyecto</th>
@@ -52,10 +53,13 @@
                                 <th>Movilizado</th>
                                 <th>Operador</th>
                                 <th>Visita</th>
+                                <th>Fecha Estimada</th>
+                                <th>Fase</th>
+                                <th>Avance</th>
                                 <th>Comentarios</th>
-                                <th width="90px">Acciones</th>
+                                <th>Acciones</th>
                             </tr>
-
+                            </thead>
                             @foreach ($actividades as $actividad)
                                 <tr>
                                     <td><b>{{$actividad->id_actividades}}.</b></td>
@@ -67,26 +71,17 @@
                                     <td>{{$actividad->bases}}</td>
                                     <td>{{$actividad->comprador}}</td>
                                     <td>{{$actividad->costo_presupuestado}}</td>
-                                    <td>{{$actividad->id_estado}}</td>
+                                    <td>{{$actividad->estatus}}</td>
                                     <td>{{$actividad->adjudicado}}</td>
                                     <td>{{$actividad->tiempo_ejecucion}}</td>
                                     <td>{{$actividad->fr043}}</td>
                                     <td>{{$actividad->movilizado}}</td>
                                     <td>{{$actividad->operador}}</td>
                                     <td>{{$actividad->visita_terreno}}</td>
+                                    <td>{{$actividad->fecha_estimada}}</td>
+                                    <td>{{$actividad->fase}}</td>
+                                    <td>{{$actividad->avance}}</td>
                                     <td>{{$actividad->comentarios}}</td>
-
-
-                                    {{-- <td>
-                                        @if($actividad->cronograma)
-                                            <a href="{{route('downloadfileProyectos', $actividad->id_proyecto)}}"
-                                               title=""
-                                               class="btn btn-danger btn-icon btn-circle" data-toggle="tooltip"
-                                               data-container="body" data-title="{{$actividad->cronograma}}">
-                                                <i class="fa fa-file-pdf"></i>
-                                            </a>
-                                        @endif
-                                    </td> --}}
                                     <td>
                                         <form action="{{ route('actividades.destroy', $actividad->id_actividades) }}"
                                               method="post">
@@ -96,16 +91,19 @@
                                                         class="fa fa-pencil-alt"></i></a>
                                             @csrf
                                             @method('DELETE')
-                                            <button id="btn-proyectos-delete"  type="submit"
-                                                    class="btn btn-icon btn-circle btn-danger" data-toggle="tooltip" data-container="body" data-id-="{{$actividad->id_actividades}}" data-title="Eliminar"><i
-                                                        class="fa fa-trash-alt"></i>
+
+                                            <a href="javascript:;" data-click="swal-danger-actividades" data-id="{{$actividad->id_actividades}}"
+                                               class="btn btn-icon btn-circle btn-danger" data-toggle="tooltip"
+                                               data-container="body" data-title="Eliminar"><i
+                                                        class="fa fa-trash-alt"></i></a>
+                                            <button id="btn-actividades-delete-{{$actividad->id_actividades}}" style="display: none" type="submit"
+                                                    class="btn btn-sm btn-danger">Delete
                                             </button>
                                         </form>
                                     </td>
                                 </tr>
                             @endforeach
                         </table>
-                        {!! $actividades->links('pagination::bootstrap-4') !!}
                     @else
                         <div class="alert alert-info fade show" data-auto-dismiss="2000">
                             <span class="close" data-dismiss="alert">×</span>

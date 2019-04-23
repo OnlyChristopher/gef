@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Mail;
+use App\Mail\Notificacion;
 
 class NotificacionesController extends Controller
 {
@@ -32,7 +34,8 @@ class NotificacionesController extends Controller
     public function create($id)
     {
     	$usuarios = DB::table('users')->get();
-    	return view('notificaciones.create', ['usuarios' => $usuarios, 'temporales' => $id]);
+    	$temporales = DB::table('temporales')->where('id_temporal',$id)->first();
+    	return view('notificaciones.create', ['usuarios' => $usuarios, 'temporales' => $temporales]);
     }
 
     /**
@@ -44,17 +47,26 @@ class NotificacionesController extends Controller
     public function store(Request $request)
     {
         $id_temporal        = $request->input('id_temporal');
-        $id_users           = $request->input('usuario_id');
+		$usuario_carga      = $request->input('id_user');
+        $responsables       = $request->input('usuario_id');
         $comentarios        = $request->input('comentarios');
         $usuario_creacion   = $request->input('id_user');
 
-        foreach ($id_users as $id_user){
+        $asunto = 'Notificaciones';
+
+
+        foreach ($responsables as $responsable){
 			$data[] = array('id_temporal' => $id_temporal,
-			                'id_user' => $id_user,
+			                'id_user' => $usuario_carga,
+			                'responsable' => $responsable,
 			                'comentarios' => $comentarios,
 			                'usuario_creacion' => $usuario_creacion,
 			                'fecha_creacion' => $this->dateformt);
-		}
+
+			$user = DB::table('users')->where('id',$responsable)->first();
+
+	        Mail::to($user->email)->send(new Notificacion($asunto,$comentarios));
+        }
 		//dd($data);
         DB::table('notificaciones')->insert($data);
 
@@ -62,7 +74,7 @@ class NotificacionesController extends Controller
 
 
 		return redirect()->route('temporales.index')
-		                 ->with('success', 'Notificacion Registrada');
+		                 ->with('success', 'Notificacion Registrada y enviada a su Bandeja de Correo');
     }
 
     /**
@@ -73,7 +85,19 @@ class NotificacionesController extends Controller
      */
     public function show($id)
     {
-        //
+
+    	$notificacion =  DB::table('notificaciones')->where('id_temporal',$id)->first();
+
+	    $usuario_carga = DB::table('users')->where('id', $notificacion->id_user)->first();
+
+    	$responsables = DB::table('notificaciones')->where('id_temporal',$id)->get();
+
+    	foreach ($responsables as $responsable) {
+    		$correos[] = DB::table('users')->where('id', $responsable->responsable)->first();
+	    }
+
+	   	return view('notificaciones.detail', [ 'notificaciones' => $notificacion, 'usuario_carga' => $usuario_carga, 'responsables' => $correos]);
+
     }
 
     /**
@@ -109,4 +133,15 @@ class NotificacionesController extends Controller
     {
         //
     }
+	public function notificaciones(Request $request) {
+		if($request->ajax()){
+			$notificaciones = DB::table('notificaciones')
+			                         ->where('responsable', $request->usuario)
+			                         ->leftJoin('users', 'notificaciones.responsable','=','users.id')
+			                         ->select('notificaciones.*','users.firstname','users.lastname')->get();
+			$data = view('proyectos.temporales.ajax' ,compact('notificaciones'))->render();
+			//dd($notificaciones);
+			return response()->json(['notificaciones'=>$data]);
+		}
+	}
 }

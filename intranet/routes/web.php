@@ -64,11 +64,16 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('temporales', 'TemporalesController');
 	Route::get('/filetemporales/download/{id}','TemporalesController@file')->name('downloadfileTemporales');
 
-	Route::resource('clientes', 'ClientesController');
+	Route::resource('administracion/clientes', 'ClientesController');
 
 	Route::resource('notificaciones', 'NotificacionesController');
 	Route::get('notificaciones/create/{id}', 'NotificacionesController@create')->name('notifiacionesTemporalCreate');
+	Route::get('notificaciones/show/{id}', 'NotificacionesController@show')->name('notifiacionesTemporalShow');
 
+	Route::post('notificacion-ajax', ['as'=>'notificacion-ajax','uses'=>'NotificacionesController@notificaciones']);
+
+
+	Route::resource('administracion/cargos', 'CargosController');
 
 
 

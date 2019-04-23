@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Session;
 use DB;
+use Illuminate\Support\Carbon;
 
 class ProcedimientosController extends Controller
 {
@@ -24,7 +25,7 @@ class ProcedimientosController extends Controller
 	                        ->join('areas','areas.id_area','=','procedimientos.id_area')
 	                        ->select('procedimientos.*', 'areas.nombre_area')
 						    ->where('procedimientos.id_area','=',$id)
-						    ->paginate(6);
+						    ->get();
 
 	    $areas = DB::table('areas')
 	               ->where('id_area','=',$id)
@@ -68,6 +69,14 @@ class ProcedimientosController extends Controller
 
 	    $request->pdf_proc->storeAs($id_areas.'/pdf_proc/'.$codigo, $pdf_proc);
 
+	    $DeferenceInDays = Carbon::parse(Carbon::now())->diffInDays($fecha_proc);
+
+	    if($DeferenceInDays > 364){
+		    $estado = 1;
+	    }else{
+		    $estado = 0;
+	    }
+
 		$data = array('codigo' => $codigo,
 		              'id_area' => $id_areas,
 		              'nombre_proc' => $nombre_proc,
@@ -76,7 +85,7 @@ class ProcedimientosController extends Controller
 		              'usuario_creacion' => $id_users,
 		              'fecha_creacion' => $this->dateformt,
 		              'pdf_proc' => $pdf_proc,
-	                  'estado_proc' => 0);
+	                  'estado_proc' => $estado);
 
 	    DB::table('procedimientos')->insert($data);
 	    return redirect()->route('procedimientosAreas',$id_areas)
@@ -130,7 +139,14 @@ class ProcedimientosController extends Controller
         }else{
             $pdf_proc = $request->input('pdf_proc');
         }
-		
+
+	    $DeferenceInDays = Carbon::parse(Carbon::now())->diffInDays($fecha_proc);
+
+	    if($DeferenceInDays > 364){
+		    $estado = 1;
+	    }else{
+		    $estado = 0;
+	    }
 
 		$data = array('codigo' => $codigo,
 		              'id_area' => $id_areas,
@@ -140,7 +156,7 @@ class ProcedimientosController extends Controller
 		              'usuario_actualizo' => $id_users,
 		              'fecha_actualizo' => $this->dateformt,
 		              'pdf_proc' => $pdf_proc,
-	                  'estado_proc' => 0);
+	                  'estado_proc' => $estado);
 
 	    DB::table('procedimientos')->where('id', $id)->update($data);
 	    return redirect()->route('procedimientosAreas',$id_areas)
