@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CarpetasController extends Controller
 {
@@ -52,14 +51,12 @@ class CarpetasController extends Controller
 			    $tree .='</li>';
 		    }
 		    $tree .='</ul>';
-		    return view('proyectos.carpetas.index', ['proyectos' => $proyectos, 'archivos' => $files, 'carpetas' => $carpetassecond],compact('tree'));
 
 	    } catch (\Exception $e) {
-            //return back()->withErrors('success',$e->getMessage())->withInput();
             return back()->with('success',$e->getMessage());
 	    }
+	    return view('proyectos.carpetas.index', ['proyectos' => $proyectos, 'archivos' => $files, 'carpetas' => $carpetassecond],compact('tree'));
 
-		//dd($tree);
     }
 
 	public function childView($carpeta,$proyecto)
@@ -92,18 +89,28 @@ class CarpetasController extends Controller
 	}
 	public function archiveAloneView($carpeta,$proyecto)
 	{
+
 		$archivos =   DB::table('archivos_carpetas')
 		                ->where('id_proyecto','=',$proyecto)
 		                ->where('id_carpetaprincipal','=',$carpeta)
 		                ->whereNull('id_carpetasecundaria')
 		                ->get();
 
+
 		$file= '';
 		if(count($archivos) > 0){
 			$file ='<ul>';
 			foreach ($archivos as $arr) {
 				if(count($archivos)){
-					$file .='<li data-jstree=\'{"icon" : "fa fa-file-excel fa-lg text-primary"}\'><a href="/file/carpetas/download/'.$arr->id.'">'.$arr->nombre.'</a>';
+					$carpetas = DB::table('carpetas_principales')->where('id',$arr->id_carpetaprincipal)->first();
+					$size  = Storage::disk('local')->size('proyectos/'.$proyecto.'/'.$carpetas->nombre.'/'.$arr->nombre.'');
+					if($size > 0){
+						$color  = '';
+					}else{
+						$color  = 'red';
+					}
+					$file .='<li data-jstree=\'{"icon" : "fa fa-file-excel fa-lg text-primary"}\'><a  title="'.$size.'" class="'.$color.'" href="/file/carpetas/download/'.$arr->id.'">'.$arr->nombre.'</a>';
+
 				}
 			}
 				$file .="</li></ul>";
@@ -123,7 +130,18 @@ class CarpetasController extends Controller
 		$file ='<ul>';
 		foreach ($archivos as $arr) {
 			if(count($archivos)){
-				$file .='<li data-jstree=\'{"icon" : "fa fa-file-excel fa-lg text-primary"}\'><a href="/file/carpetas/download/'.$arr->id.'">'.$arr->nombre.'</a></li>';
+				$carpetas = DB::table('carpetas_principales')->where('id',$arr->id_carpetaprincipal)->first();
+				$other =    DB::table('carpetas_secundarias')->where('id',$arr->id_carpetasecundaria)->first();
+
+				$size  = Storage::disk('local')->size('proyecto/'.$proyecto.'/'.$carpetas->nombre.'/'.$other->nombre.'/'.$arr->nombre.'');
+
+				if($size > 0){
+					$color  = '';
+				}else{
+					$color  = 'red';
+				}
+
+				$file .='<li data-jstree=\'{"icon" : "fa fa-file-excel fa-lg text-primary"}\'><a title="'.$size.'" class="'.$color.'"  href="/file/carpetas/download/'.$arr->id.'">'.$arr->nombre.'</a></li>';
 			}
 
 		}
@@ -219,9 +237,6 @@ class CarpetasController extends Controller
 			    return back()->with('success','No hay Sub Carpetas');
 
 		    }
-
-
-
 	    } catch (\Exception $e) {
 		    //return back()->withErrors('success',$e->getMessage())->withInput();
 		    return back()->with('success',$e->getMessage());
@@ -301,7 +316,19 @@ class CarpetasController extends Controller
 	    $carpeta = DB::table('archivos_carpetas')
 	                    ->where('id','=',$id)
 	                    ->first();
-    	DB::table('archivos_carpetas')->where('id', $id)->delete();
+
+    	if($carpeta->id_carpetasecundaria){
+    		$one = DB::table('carpetas_principales')->where('id',$carpeta->id_carpetaprincipal)->first();
+    		$two = DB::table('carpetas_secundarias')->where('id',$carpeta->id_carpetasecundaria)->first();
+		    Storage::disk('local')->delete('proyecto/'.$carpeta->id_proyecto.'/'.$one->nombre.'/'.$two->nombre.'/'.$carpeta->nombre);
+	    }else{
+		    $one = DB::table('carpetas_principales')->where('id',$carpeta->id_carpetaprincipal)->first();
+		    Storage::disk('local')->delete('proyecto/'.$carpeta->id_proyecto.'/'.$one->nombre.'/'.$carpeta->nombre);
+
+	    }
+	    DB::table('archivos_carpetas')->where('id', $id)->delete();
+
+
 	    return redirect()->route('carpetasProyectos',$carpeta->id_proyecto)
 	                     ->with('success', 'Registro eliminado correctamente');
     }
@@ -316,7 +343,6 @@ class CarpetasController extends Controller
             $folder  = DB::table('carpetas_principales')
                         ->where('id',$carpeta->id_carpetaprincipal)
                         ->first();
-            //dd($carpeta);
             DB::table('archivos_carpetas')->where('id_carpetasecundaria', $carpeta->id)->delete();
             DB::table('carpetas_secundarias')->where('id', $id)->delete();
 
@@ -326,7 +352,6 @@ class CarpetasController extends Controller
                             ->with('success', 'Registro eliminado correctamente');
 
         } catch (\Exception $e) {
-            //return back()->withErrors('success',$e->getMessage())->withInput();
             return back()->with('success',$e->getMessage());
         }
     }
@@ -359,46 +384,62 @@ class CarpetasController extends Controller
 		return view('proyectos.carpetas.file', ['proyectos' => $proyectos, 'carpetas' => $carpetas]);
 	}
 
+	public function filestorepreview(Request $request){
+		try{
+			$id_carpetaprincipal    = $request->input('id_carpetaprincipal');
+			$id_carpetasecundaria   = $request->input('id_carpetasecundaria');
+			$id_proyecto            = $request->input('id_proyecto');
+
+			$carpetaprincipal = DB::table('carpetas_principales')
+			                      ->where('id','=',$id_carpetaprincipal)
+			                      ->first();
+			$carpetasecundaria = DB::table('carpetas_secundarias')
+			                       ->where('id','=',$id_carpetasecundaria)
+			                       ->first();
+
+			if($id_carpetasecundaria){
+				foreach ($request->file('files') as $file){
+					$name   =   $file->getClientOriginalName();
+					$file->storeAs('proyecto/'.$id_proyecto.'/'.$carpetaprincipal->nombre.'/'.$carpetasecundaria->nombre, $name);
+				}
+			}else{
+				foreach ($request->file('files') as $file){
+					$name   =   $file->getClientOriginalName();
+					$file->storeAs('proyecto/'.$id_proyecto.'/'.$carpetaprincipal->nombre.'/', $name);
+				}
+			}
+
+		}catch (\Exception $e) {
+			return back()->with('success',$e->getMessage());
+		}
+
+
+		return 'Subio el Archivo, ahora guarde el registro';
+	}
+
 	public function filestore(Request $request)
 	{
-		$id_carpetaprincipal    = $request->input('id_carpetaprincipal');
-		$id_carpetasecundaria   = $request->input('id_carpetasecundaria');
-		$id_proyecto            = $request->input('id_proyecto');
-		$id_user                = $request->input('id_user');
-		//$files                  = $request->files->getClientOriginalName();
-		//dd($files);
+		try{
+			$id_carpetaprincipal    = $request->input('id_carpetaprincipal');
+			$id_carpetasecundaria   = $request->input('id_carpetasecundaria');
+			$id_proyecto            = $request->input('id_proyecto');
+			$id_user                = $request->input('id_user');
 
-		$carpetaprincipal = DB::table('carpetas_principales')
-								->where('id','=',$id_carpetaprincipal)
-								->first();
-		$carpetasecundaria = DB::table('carpetas_secundarias')
-		                       ->where('id','=',$id_carpetasecundaria)
-		                       ->first();
-		if($id_carpetasecundaria){
+
 			foreach ($request->file('files') as $file){
-				$name   =   $file->getClientOriginalName();
-				$file->storeAs('proyecto/'.$id_proyecto.'/'.$carpetaprincipal->nombre.'/'.$carpetasecundaria->nombre, $name);
+				$data[] = array('id_proyecto' => $id_proyecto,
+				                'id_carpetaprincipal' => $id_carpetaprincipal,
+				                'id_carpetasecundaria' => $id_carpetasecundaria,
+				                'nombre' => $file->getClientOriginalName(),
+				                'usuario_creacion' => $id_user,
+				                'fecha_creacion' => $this->dateformt);
 			}
-		}else{
-			foreach ($request->file('files') as $file){
-				$name   =   $file->getClientOriginalName();
-				$file->storeAs('proyecto/'.$id_proyecto.'/'.$carpetaprincipal->nombre.'/', $name);
-			}
+
+			DB::table('archivos_carpetas')->insert($data);
+
+		}catch (\Exception $e) {
+			return back()->with('success',$e->getMessage());
 		}
-
-		foreach ($request->file('files') as $file){
-			$data[] = array('id_proyecto' => $id_proyecto,
-			              'id_carpetaprincipal' => $id_carpetaprincipal,
-			              'id_carpetasecundaria' => $id_carpetasecundaria,
-			              'nombre' => $file->getClientOriginalName(),
-			              'usuario_creacion' => $id_user,
-			              'fecha_creacion' => $this->dateformt);
-		}
-
-		//dd($data);
-
-		DB::table('archivos_carpetas')->insert($data);
-
 
 		return redirect()->route('carpetasProyectos',$id_proyecto)
 		                 ->with('success', 'Registro Exitoso');

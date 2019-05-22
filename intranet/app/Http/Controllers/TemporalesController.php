@@ -33,8 +33,8 @@ class TemporalesController extends Controller
 		$temps = DB::table('temporales')->get();
 
 		foreach ($temps as $temp){
-			$documentos = DB::table('documentos')->where('id_doc', $temp->tipo_doc)->first();
-				$DeferenceInDays = Carbon::parse(Carbon::now())->diffInDays($temp->fecha_carga);
+			$documentos      = DB::table('documentos')->where('id_doc', $temp->tipo_doc)->first();
+            $DeferenceInDays = Carbon::parse(Carbon::now())->diffInDays($temp->fecha_carga);
 				if( $DeferenceInDays > $documentos->vigencia_doc){
 					DB::table('temporales')->where('id_temporal', $temp->id_temporal)->update(['estado' => 'CADUCADO']);
 				 }

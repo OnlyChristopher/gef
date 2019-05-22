@@ -47,7 +47,7 @@
         <div class="panel-body">
             <div class="container">
                 @if ($message = Session::get('success'))
-                    <div class="alert alert-success fade show" data-auto-dismiss="2000">
+                    <div class="alert alert-success fade show" data-auto-dismiss="5000">
                         <span class="close" data-dismiss="alert">×</span>
                         <strong>{{$message}}</strong>
                     </div>
@@ -85,7 +85,7 @@
 
                         </div>
                     @else
-                        <div class="alert alert-info fade show" data-auto-dismiss="2000">
+                        <div class="alert alert-info fade show" data-auto-dismiss="8000">
                             <span class="close" data-dismiss="alert">×</span>
                             <strong>No hay carpetas creadas</strong>
                         </div>

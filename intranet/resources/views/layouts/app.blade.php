@@ -139,7 +139,7 @@
 					    <span>Inicio</span>
 					    </a>
 					</li>
-                    @if(Auth::user()->profile == 1 || Auth::user()->profile == 2)
+                    @if(Auth::user()->profile == 1 || Auth::user()->profile == 2 || Auth::user()->profile == 4)
                     <li class="has-sub active @yield('clase-open-documentos') @yield('clase-active-documentos')">
 						<a href="javascript:;">
 							<b class="caret"></b>
@@ -163,7 +163,7 @@
 						</ul>
 					</li>
                     @endif
-                    @if(Auth::user()->profile == 1 || Auth::user()->profile == 2 || Auth::user()->profile == 3 )
+                    @if(Auth::user()->profile == 1 || Auth::user()->profile == 2 || Auth::user()->profile == 3 || Auth::user()->profile == 4)
 					<li class="has-sub active @yield('clase-open-proyecto') @yield('clase-active-proyecto')">
 						<a href="javascript:;">
 							<b class="caret"></b>
@@ -174,7 +174,7 @@
                                 <li class="@yield('clase-active-proyectos')">
                                     <a href="{{action('ProyectosController@index')}}">{{ __('Listado de Proyectos') }}</a>
                                 </li>
-							@if(Auth::user()->profile == 1 || Auth::user()->profile == 2)
+							@if(Auth::user()->profile == 1 || Auth::user()->profile == 2 || Auth::user()->profile == 4)
 								<li class="@yield('clase-active-actividades')">
 									<a href="{{action('ActividadesController@index')}}">{{ __('Listado de Actividades') }}</a>
 								</li>
@@ -186,7 +186,7 @@
 						</ul>
 					</li>
                     @endif
-                    @if(Auth::user()->profile == 1)
+                    @if(Auth::user()->profile == 1 || Auth::user()->profile == 4)
 					<li class="has-sub @yield('clase-open-administracion') @yield('clase-active-administracion')">
 						<a href="javascript:;">
 							<b class="caret"></b>
@@ -603,7 +603,8 @@
 		}else{
 			alert('Seleccione carpeta principal');
 		}
-	})
+	});
+
 
 
 </script>
