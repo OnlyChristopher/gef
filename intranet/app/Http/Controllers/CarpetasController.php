@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class CarpetasController extends Controller
@@ -20,7 +21,7 @@ class CarpetasController extends Controller
 	}
     public function index($id)
     {
-
+		//dd(ini_get('post_max_size'));
 	    try {
 		    $proyectos      =   DB::table('proyectos')
 		                         ->where('id_proyecto','=',$id)
@@ -34,7 +35,7 @@ class CarpetasController extends Controller
 		                          ->where('id_proyecto','=',$id)
 		                          ->whereNull('id_carpetasecundaria')
                                   ->get();
-                                  
+
             $files =         DB::table('archivos_carpetas')
                                  ->where('id_proyecto','=',$id)
                                  ->get();
@@ -103,13 +104,24 @@ class CarpetasController extends Controller
 			foreach ($archivos as $arr) {
 				if(count($archivos)){
 					$carpetas = DB::table('carpetas_principales')->where('id',$arr->id_carpetaprincipal)->first();
-					$size  = Storage::disk('local')->size('proyectos/'.$proyecto.'/'.$carpetas->nombre.'/'.$arr->nombre.'');
-					if($size > 0){
-						$color  = '';
+
+					$path = storage_path().'/app/proyecto/'.$proyecto.'/'.$carpetas->nombre.'/'.$arr->nombre.'';
+
+					if(File::exists($path)) {
+						$size  = Storage::disk('local')->size('proyecto/'.$proyecto.'/'.$carpetas->nombre.'/'.$arr->nombre.'');
+						$mb =  number_format($size / 1048576,2);
+
+						if($size > 0){
+							$color  = '';
+						}else{
+							$color  = 'red';
+						}
+						$file .='<li data-jstree=\'{"icon" : "fa fa-file-excel fa-lg text-primary"}\'><a  title="'.$size.'" class="'.$color.'" href="/file/carpetas/download/'.$arr->id.'">'.$arr->nombre.' - <b>'.$mb.' MB</b></a>';
 					}else{
-						$color  = 'red';
+						$color = 'blue';
+						$file .='<li data-jstree=\'{"icon" : "fa fa-file-excel fa-lg text-primary"}\'><a title="Archivo no existe" class="'.$color.'" >'.$arr->nombre.'</a></li>';
 					}
-					$file .='<li data-jstree=\'{"icon" : "fa fa-file-excel fa-lg text-primary"}\'><a  title="'.$size.'" class="'.$color.'" href="/file/carpetas/download/'.$arr->id.'">'.$arr->nombre.'</a>';
+
 
 				}
 			}
@@ -119,6 +131,13 @@ class CarpetasController extends Controller
 		}
 		return $file;
 	}
+
+	/**
+	 * @param $carpeta
+	 * @param $proyecto
+	 *
+	 * @return string
+	 */
 	public function archiveView($carpeta,$proyecto)
 	{
 		$archivos =   DB::table('archivos_carpetas')
@@ -133,15 +152,22 @@ class CarpetasController extends Controller
 				$carpetas = DB::table('carpetas_principales')->where('id',$arr->id_carpetaprincipal)->first();
 				$other =    DB::table('carpetas_secundarias')->where('id',$arr->id_carpetasecundaria)->first();
 
-				$size  = Storage::disk('local')->size('proyecto/'.$proyecto.'/'.$carpetas->nombre.'/'.$other->nombre.'/'.$arr->nombre.'');
+				$path = storage_path().'/app/proyecto/'.$proyecto.'/'.$carpetas->nombre.'/'.$other->nombre.'/'.$arr->nombre.'';
 
-				if($size > 0){
-					$color  = '';
+				if(File::exists($path)) {
+					$size  = Storage::disk('local')->size('proyecto/'.$proyecto.'/'.$carpetas->nombre.'/'.$other->nombre.'/'.$arr->nombre.'');
+					$mb =  number_format($size / 1048576,2);
+					if($size > 0){
+						$color  = '';
+					}else{
+						$color  = 'red';
+					}
+					$file .='<li data-jstree=\'{"icon" : "fa fa-file-excel fa-lg text-primary"}\'><a title="'.$size.'" class="'.$color.'"  href="/file/carpetas/download/'.$arr->id.'">'.$arr->nombre.' - <b>'.$mb.' MB</b></a></li>';
 				}else{
-					$color  = 'red';
+					$color = 'blue';
+					$file .='<li data-jstree=\'{"icon" : "fa fa-file-excel fa-lg text-primary"}\'><a title="Archivo no existe" class="'.$color.'" >'.$arr->nombre.'</a></li>';
 				}
 
-				$file .='<li data-jstree=\'{"icon" : "fa fa-file-excel fa-lg text-primary"}\'><a title="'.$size.'" class="'.$color.'"  href="/file/carpetas/download/'.$arr->id.'">'.$arr->nombre.'</a></li>';
 			}
 
 		}
@@ -328,18 +354,19 @@ class CarpetasController extends Controller
 	    }
 	    DB::table('archivos_carpetas')->where('id', $id)->delete();
 
-
+	    $max = DB::table( 'archivos_carpetas' )->max( 'id' ) + 1;
+	    DB::statement( "ALTER TABLE archivos_carpetas AUTO_INCREMENT =  $max" );
 	    return redirect()->route('carpetasProyectos',$carpeta->id_proyecto)
 	                     ->with('success', 'Registro eliminado correctamente');
     }
 
     public function destroyfolder($id)
     {
-        try{        
+        try{
             $carpeta = DB::table('carpetas_secundarias')
                         ->where('id','=',$id)
                         ->first();
-                        
+
             $folder  = DB::table('carpetas_principales')
                         ->where('id',$carpeta->id_carpetaprincipal)
                         ->first();
@@ -402,11 +429,15 @@ class CarpetasController extends Controller
 					$name   =   $file->getClientOriginalName();
 					$file->storeAs('proyecto/'.$id_proyecto.'/'.$carpetaprincipal->nombre.'/'.$carpetasecundaria->nombre, $name);
 				}
+				return 'Subio el Archivo, ahora guarde el registro';
+
 			}else{
 				foreach ($request->file('files') as $file){
 					$name   =   $file->getClientOriginalName();
 					$file->storeAs('proyecto/'.$id_proyecto.'/'.$carpetaprincipal->nombre.'/', $name);
 				}
+				return 'Subio el Archivo, ahora guarde el registro';
+
 			}
 
 		}catch (\Exception $e) {

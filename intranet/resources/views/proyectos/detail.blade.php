@@ -27,6 +27,12 @@
         <!-- end invoice-company -->
         <!-- begin invoice-content -->
         <div class="invoice-content">
+            @if ($message = Session::get('success'))
+                <div class="alert alert-success fade show" data-auto-dismiss="8000">
+                    <span class="close" data-dismiss="alert">×</span>
+                    <strong>{{$message}}</strong>
+                </div>
+        @endif
             <!-- begin table-responsive -->
             <div class="table-responsive">
                 @if(count($actividades))

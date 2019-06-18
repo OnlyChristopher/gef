@@ -24,7 +24,7 @@
         </div>
         <div class="panel-body">
                 @if ($message = Session::get('success'))
-                <div class="alert alert-success fade show" data-auto-dismiss="2000">
+                <div class="alert alert-success fade show" data-auto-dismiss="8000">
                     <span class="close" data-dismiss="alert">×</span>
                     <strong>{{$message}}</strong>
                 </div>

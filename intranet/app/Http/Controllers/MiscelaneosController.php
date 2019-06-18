@@ -58,40 +58,48 @@ class   MiscelaneosController extends Controller
      */
     public function store(Request $request)
     {
-	    $codigo             = $request->input('codigo');
-	    $id_areas           = $request->input('id_areas');
-	    $nombre_documento   = $request->input('nombre_documento');
-	    $version            = $request->input('version');
-	    $fecha_proc         = $request->input('fecha_proc');
-	    $id_users           = $request->input('id_users');
-	    $archivo_documento  = $request->archivo_documento->getClientOriginalName();
+	    try{
+		    $codigo             = $request->input('codigo');
+		    $id_areas           = $request->input('id_areas');
+		    $nombre_documento   = $request->input('nombre_documento');
+		    $version            = $request->input('version');
+		    $fecha_proc         = $request->input('fecha_proc');
+		    $id_users           = $request->input('id_users');
+		    $archivo_documento  = $request->archivo_documento->getClientOriginalName();
 
-	    $request->archivo_documento->storeAs($id_areas.'/archivo_documento/'.$codigo, $archivo_documento);
+		    $request->archivo_documento->storeAs($id_areas.'/archivo_documento/'.$codigo, $archivo_documento);
 
-	    //Storage::putFile('app/'.$id_areas.'/archivo_documento/'.$codigo,$request->file('archivo_documento'));
-	    $DeferenceInDays = Carbon::parse(Carbon::now())->diffInDays($fecha_proc);
+		    //Storage::putFile('app/'.$id_areas.'/archivo_documento/'.$codigo,$request->file('archivo_documento'));
+		    $DeferenceInDays = Carbon::parse(Carbon::now())->diffInDays($fecha_proc);
 
-	    if($DeferenceInDays > 364){
-		    $estado = 1;
-	    }else{
-		    $estado = 0;
+		    if($DeferenceInDays > 364){
+			    $estado = 1;
+		    }else{
+			    $estado = 0;
+		    }
+
+		    $data = array('codigo' => $codigo,
+		                  'id_area' => $id_areas,
+		                  'nombre_documento' => $nombre_documento,
+		                  'version' => $version,
+		                  'fecha_proc' => $fecha_proc,
+		                  'usuario_creacion' => $id_users,
+		                  'fecha_creacion' => $this->dateformt,
+		                  'archivo_documento' => $archivo_documento,
+		                  'estado_documento' => $estado);
+
+		    //dd($data);
+		    DB::table('miscelaneos')->insert($data);
+
+
+	    } catch (\Exception $e) {
+		    //return back()->withErrors('success',$e->getMessage())->withInput();
+		    return back()->with( 'success', $e->getMessage() );
 	    }
-
-	    $data = array('codigo' => $codigo,
-	                  'id_area' => $id_areas,
-	                  'nombre_documento' => $nombre_documento,
-	                  'version' => $version,
-	                  'fecha_proc' => $fecha_proc,
-	                  'usuario_creacion' => $id_users,
-	                  'fecha_creacion' => $this->dateformt,
-	                  'archivo_documento' => $archivo_documento,
-	                  'estado_documento' => $estado);
-
-	    //dd($data);
-	    DB::table('miscelaneos')->insert($data);
 
 	    return redirect()->route('miscelaneosAreas',$id_areas)
 	                     ->with('success', 'Registro Exitoso');
+
     }
 
     /**
@@ -173,7 +181,16 @@ class   MiscelaneosController extends Controller
      */
     public function destroy($id)
     {
-	    DB::table('miscelaneos')->where('id', $id)->delete();
+		try{
+			DB::table('miscelaneos')->where('id', $id)->delete();
+
+			$max = DB::table('miscelaneos')->max('$id') + 1;
+			DB::statement("ALTER TABLE miscelaneos AUTO_INCREMENT =  $max");
+
+		} catch ( \Exception $e ) {
+			return back()->with( 'success', $e->getMessage() );
+		}
+
 	    return redirect()->route('miscelaneosAreas',Session::get('id_area_global'))
 	                     ->with('success', 'Registro eliminado correctamente');
     }
